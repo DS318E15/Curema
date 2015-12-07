@@ -98,10 +98,10 @@ nginx:
         names_hash_bucket_size: 128
     upstreams: {  }
     vhosts:
-        nxv_rnbvxnytmr2v:
-            server_name: curema.dev
+       nxv_rnbvxnytmr2v:
+            server_name: curema.local
             server_aliases:
-                - www.curema.dev
+                - www.curema.local
             www_root: /var/www/public
             listen_port: '80'
             index_files:

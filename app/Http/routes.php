@@ -10,7 +10,15 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'app'], function () {
+    Route::get('/', function() {
+        view('app.dashboard');
+    });
+});
+
+
+

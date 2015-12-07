@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Curema\Http\Controllers\Auth;
 
-use App\User;
+use Curema\User;
 use Validator;
-use App\Http\Controllers\Controller;
+use Curema\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -26,12 +26,14 @@ class AuthController extends Controller
     /**
      * Create a new authentication controller instance.
      *
-     * @return void
      */
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'getLogout']);
     }
+
+    protected $loginPath = '/login';
+    protected $redirectPath = '/dashboard';
 
     /**
      * Get a validator for an incoming registration request.
