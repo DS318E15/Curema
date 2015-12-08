@@ -15,9 +15,7 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'app'], function () {
-    Route::get('/', function() {
-        view('app.dashboard');
-    });
+    Route::get('/', ['as'=>'app.home', 'uses'=> 'App\DashboardController@showIndex']);
 });
 
 
