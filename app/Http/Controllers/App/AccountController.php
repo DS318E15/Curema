@@ -17,7 +17,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return view('app.account.index', ['accounts' => Account::all()]);
+        return view('app.account.index', ['accounts' => Account::where('active', 1)->get()]);
     }
 
     /**
@@ -38,7 +38,7 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        return "store";
+        //
     }
 
     /**
@@ -49,7 +49,7 @@ class AccountController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('app.account.show', ['account' => Account::find($id)]);
     }
 
     /**
@@ -60,7 +60,7 @@ class AccountController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('app.account.edit');
     }
 
     /**
@@ -83,6 +83,26 @@ class AccountController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $account = Account::find($id);
+
+        if($account->active) {
+            $account->active = 0;
+            $account->save();
+            return redirect(route('app.account.index'));
+        } else {
+            $account->active = 1;
+            $account->save();
+            return redirect()->back();
+        }
+    }
+
+    /**
+     * Display a listing of the softdeleted resources.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function trash()
+    {
+        return view('app.account.trash', ['accounts' => Account::where('active', 0)->get()]);
     }
 }

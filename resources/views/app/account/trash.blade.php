@@ -3,10 +3,9 @@
 @section('content')
 
     <section>
-        <a href="{{ route('app.account.create') }}">Create</a>
-        <a href="{{ route('app.account.trash') }}">Trash</a>
+        <a href="{{ route('app.account.index') }}">Back</a>
 
-        <h1>Accounts</h1>
+        <h1>Deleted Accounts</h1>
 
         <table>
             <thead>
@@ -25,7 +24,9 @@
                     <td>{{ $account->phone }}</td>
                     <td>{{ $account->email }}</td>
                     <td><a href="//{{ $account->website }}">{{ $account->website }}</a></td>
-                    <td><a href="{{ route('app.employee.show', $account->user->id) }}">{{ $account->user->name }}</a></td>
+                    <td>
+                        <a href="{{ route('app.employee.show', $account->user->id) }}">{{ $account->user->name }}</a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

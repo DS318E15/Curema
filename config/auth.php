@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => Curema\User::class,
+    'model' => Curema\Models\User::class,
 
     /*
     |--------------------------------------------------------------------------

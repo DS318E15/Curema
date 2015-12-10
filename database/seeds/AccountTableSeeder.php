@@ -12,28 +12,6 @@ class AccountTableSeeder extends Seeder
      */
     public function run()
     {
-        Account::create([
-            'name' => 'Apple',
-        ]);
-
-        Account::create([
-            'name' => 'Google',
-        ]);
-
-        Account::create([
-            'name' => 'Microsoft',
-        ]);
-
-        Account::create([
-            'name' => 'Intel',
-        ]);
-
-        Account::create([
-            'name' => 'Samsung',
-        ]);
-
-        Account::create([
-            'name' => 'IBM',
-        ]);
+        factory(Curema\Models\App\Account::class, 5)->create();
     }
 }

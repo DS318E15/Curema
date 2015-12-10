@@ -11,18 +11,21 @@
 |
 */
 
-Route::group(['prefix' => 'app'], function () {
-    Route::resource('account', 'App\AccountController');
-    Route::resource('case', 'App\CaseController');
-    Route::resource('contact', 'App\ContactController');
-    Route::resource('employee', 'App\EmployeeController');
-    Route::resource('lead', 'App\LeadController');
-    Route::resource('opportunity', 'App\OpportunityController');
+Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
 
+    // Account
+    Route::get('account/trash', ['uses' => 'App\AccountController@trash', 'as' => 'app.account.trash']);
+    Route::resource('account', 'App\AccountController');
+
+    Route::resource('employee', 'App\EmployeeController');
     Route::controller('/', 'App\DashboardController', [
         'getIndex' => 'app.dashboard.index'
     ]);
 });
+
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 Route::get('/', function () {
     return view('welcome');

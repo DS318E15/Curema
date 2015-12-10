@@ -2,7 +2,7 @@
 
 namespace Curema\Http\Controllers\Auth;
 
-use Curema\User;
+use Curema\Models\User;
 use Validator;
 use Curema\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
