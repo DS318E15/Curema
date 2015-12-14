@@ -32,7 +32,7 @@ class AuthController extends Controller
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
-    protected $loginPath = '/login';
+    protected $loginPath = '/auth/login';
     protected $redirectPath = '/dashboard';
 
     /**

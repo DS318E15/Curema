@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Curema\Http\Requests;
 use Curema\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
@@ -38,7 +39,20 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'street_name' => 'required',
+            'street_number' => 'required',
+            'city' => 'required',
+            'zip' => 'required',
+            'country' => 'required',
+        ]);
+
+        $account = new Account($request->all());
+        $account->user_id = Auth::user()->id;
+        $account->save();
+
+        return redirect()->route('app.account.show', $account->id);
     }
 
     /**
@@ -60,7 +74,7 @@ class AccountController extends Controller
      */
     public function edit($id)
     {
-        return view('app.account.edit');
+        return view('app.account.edit', ['account' => Account::find($id)]);
     }
 
     /**
@@ -72,11 +86,25 @@ class AccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'street_name' => 'required',
+            'street_number' => 'required',
+            'city' => 'required',
+            'zip' => 'required',
+            'country' => 'required',
+        ]);
+
+        $account = Account::find($id);
+        $account->update($request->all());
+        $account->save();
+
+        $request->session()->flash('alert-success', 'Account was successful added!');
+        return redirect()->back();
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Deactivate the specified resource.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -84,16 +112,25 @@ class AccountController extends Controller
     public function destroy($id)
     {
         $account = Account::find($id);
+        $account->active = 0;
+        $account->save();
 
-        if($account->active) {
-            $account->active = 0;
-            $account->save();
-            return redirect(route('app.account.index'));
-        } else {
-            $account->active = 1;
-            $account->save();
-            return redirect()->back();
-        }
+        return redirect()->route('app.account.index');
+    }
+
+    /**
+     * Activate the specified resource.
+     *
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $account = Account::find($id);
+        $account->active = 1;
+        $account->save();
+
+        return redirect()->back();
     }
 
     /**

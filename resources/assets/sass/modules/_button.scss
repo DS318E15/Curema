@@ -1,0 +1,43 @@
+button, .button {
+  height: 40px;
+  line-height: 40px;
+  display: inline-block;
+  padding: 0 30px;
+  border: 0;
+  background-color: transparent;
+  box-shadow: 0 0 0 1px lighten($emperor, 20);
+  border-radius: 3px;
+  font-size: .875rem;
+  font-weight: 400;
+  color: lighten($emperor, 20);
+  text-decoration: none;
+  transition: 150ms;
+
+  &:hover {
+    box-shadow: 0 0 0 1px $ebony-clay;
+    color: $ebony-clay;
+  }
+}
+
+.button-group {
+  display: flex;
+
+  button, .button {
+    margin-left: 1px;
+    border-radius: 0;
+    position: relative;
+
+    &:hover {
+      z-index: 1;
+    }
+
+    &:first-child {
+      margin-left: 0;
+      border-radius: 3px 0px 0px 3px;
+    }
+
+    &:last-child {
+      border-radius: 0px 3px 3px 0px;
+    }
+  }
+}

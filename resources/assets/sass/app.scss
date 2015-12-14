@@ -1,13 +1,15 @@
-@import "../../../node_modules/normalize.scss/normalize.scss";
+@import "../../../node_modules/normalize.scss/normalize";
+@import "../../../public/fonts/icomoon/style";
 
 @import "helpers/colors";
 
 @import "modules/typography";
+@import "modules/button";
 @import "modules/table";
+@import "modules/input";
 
 @import "partials/base";
 @import "partials/nav";
 @import "partials/header";
 @import "partials/main";
-@import "partials/list";
-@import "partials/create";
+

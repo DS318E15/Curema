@@ -2,38 +2,45 @@
 
 @section('content')
 
+    <div class="flex">
+        <section class="panel content">
+            <header>
+                <a href="{{ route('app.account.index') }}" class="button">Back</a>
+                <a href="{{ route('app.account.edit', $account->id) }}" class="button">Edit</a>
+            </header>
 
-    <section>
-        <a href="{{ route('app.account.index') }}">Back</a>
-        <a href="{{ route('app.account.edit', $account->id) }}">Edit</a>
-        <a href="{{ route('app.account.create') }}">Create</a>
+            <div class="input">
+                Name:
+                <div>{{ $account->name }}</div>
+            </div>
 
-        <h1>Account: {{ $account->name }}</h1>
+            <div class="input">
+                Address:
+                <div>{{ $account->street_name}} {{ $account->street_number }}
+                    , {{ $account->zip }} {{ $account->city }} {{ $account->country }}</div>
+            </div>
 
-        <div>
-            <b>Name</b>
-            <div>{{ $account->name }}</div>
-        </div>
-        <div>
-            <b>Address</b>
-            <div>{{ $account->street_name}} {{ $account->street_number }}, {{ $account->zip }} {{ $account->city }} {{ $account->country }}</div>
-        </div>
-        <div>
-            <b>CVR</b>
-            <div>{{ $account->cvr }}</div>
-        </div>
-        <div>
-            <b>Phone</b>
-            <div>{{ $account->phone }}</div>
-        </div>
-        <div>
-            <b>Email</b>
-            <div>{{ $account->email }}</div>
-        </div>
-        <div>
-            <b>Website</b>
-            <div>{{ $account->website }}</div>
-        </div>
-    </section>
+            <div class="input">
+                CVR:
+                <div>{{ $account->cvr }}</div>
+            </div>
+
+            <div class="input">
+                Phone:
+                <div>{{ $account->phone }}</div>
+            </div>
+
+            <div class="input">
+                Email:
+                <div>{{ $account->email }}</div>
+            </div>
+
+            <div class="input">
+                Website:
+                <div><a href="//{{ $account->website }}">{{ $account->website }}</a></div>
+            </div>
+        </section>
+        <section class="panel activities">activities</section>
+    </div>
 
 @endsection

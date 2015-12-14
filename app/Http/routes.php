@@ -12,10 +12,17 @@
 */
 
 Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
+    $resources = [
+        'account' => 'App\AccountController'
+    ];
 
-    // Account
-    Route::get('account/trash', ['uses' => 'App\AccountController@trash', 'as' => 'app.account.trash']);
-    Route::resource('account', 'App\AccountController');
+    foreach ($resources as $route => $controller) {
+        Route::post($route . '/{' . $route . '}/destroy', ['uses' => $controller . '@destroy', 'as' => 'app.' . $route . '.destroy']);
+        Route::post($route . '/{' . $route . '}/restore', ['uses' => $controller . '@restore', 'as' => 'app.' . $route . '.restore']);
+        Route::get($route . '/trash', ['uses' => $controller . '@trash', 'as' => 'app.' . $route . '.trash']);
+        Route::resource($route, $controller, ['except' => 'destroy']);
+    }
+
 
     Route::resource('employee', 'App\EmployeeController');
     Route::controller('/', 'App\DashboardController', [
@@ -30,5 +37,4 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::get('/', function () {
     return view('welcome');
 });
-
 

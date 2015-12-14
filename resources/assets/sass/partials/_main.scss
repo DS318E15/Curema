@@ -1,4 +1,54 @@
-body > main {
-  flex: 1 0 auto;
-  background-color: #e7ebee;
+main {
+  height: calc(100% - 50px);
+  box-sizing: border-box;
+  overflow: auto;
+  padding: 30px;
+
+  & > header {
+    height: 100px;
+    display: flex;
+    position: relative;
+    margin: -30px -30px 30px -30px;
+    padding: 0 30px;
+    justify-content: space-between;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.30);
+    background-color: $white;
+    align-items: center;
+    z-index: 1;
+
+    > h1 {
+      margin: 0;
+      font-weight: 300;
+      font-size: 1.875rem;
+    }
+  }
+
+  .panel {
+    padding: 30px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.30);
+    background-color: $white;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .content {
+    flex: 1 0 auto;
+
+    > header {
+      display: flex;
+      justify-content: space-between;
+      margin: -15px -15px 15px -15px;
+      padding: 15px 15px 30px 15px;
+      border-bottom: 1px solid lighten($emperor, 60);
+    }
+  }
+
+  .activities {
+    flex: 0 0 400px;
+    margin-left: 30px;
+  }
 }

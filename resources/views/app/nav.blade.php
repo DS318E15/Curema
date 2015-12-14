@@ -5,7 +5,6 @@
     </li>
     <li>
         <a href="{{ route('app.account.index') }}"
-           class="{{ Ekko::areActiveRoutes(['app.account.index', 'app.account.create', 'app.account.show', 'app.account.edit']) }}">Accounts</a>
+           class="{{ Ekko::areActiveRoutes(['app.account.index', 'app.account.create', 'app.account.show', 'app.account.edit', 'app.account.trash']) }}">Accounts</a>
     </li>
-
 </ul>

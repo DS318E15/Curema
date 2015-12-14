@@ -7,22 +7,24 @@
 
     <title>Curema</title>
 
-    <link href='//fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900'>
     <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
-
 
 <nav>
     <h1>Curema</h1>
     @include('app.nav')
 </nav>
-<main>
-    <header>
 
+<div>
+    <header>
+        <!-- header -->
     </header>
-    @yield('content')
-</main>
+    <main>
+        @yield('content')
+    </main>
+</div>
 
 </body>
 </html>

@@ -22,10 +22,10 @@ class CreateAccountsTable extends Migration
             $table->string('city');
             $table->string('zip');
             $table->string('country');
-            $table->integer('cvr');
-            $table->string('phone');
-            $table->string('email');
-            $table->string('website');
+            $table->integer('cvr')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('website')->nullable();
 
             $table->boolean('active')->default(1);
             $table->timestamps();

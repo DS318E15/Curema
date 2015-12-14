@@ -1,13 +1,25 @@
 table {
-  width: 100%;
+  width: calc(100% + 30px);
+  margin: -30px -15px;
 
-  th {
-    text-align: left;
-    border-bottom: 1px solid black;
-  }
+  tr {
+    th {
+      height: 50px;
+      padding: 0 15px;
+      border-bottom: 1px solid lighten($emperor, 60);
+      text-align: left;
+      font-weight: 400;
+    }
 
-  td {
-    border-bottom: 1px solid gray;
-    padding: 10px 0;
+    td {
+      height: 50px;
+      padding: 0 15px;
+      border-bottom: 1px solid lighten($emperor, 60);
+      font-weight: 300;
+    }
+
+    &:last-of-type td {
+      border: none;
+    }
   }
 }

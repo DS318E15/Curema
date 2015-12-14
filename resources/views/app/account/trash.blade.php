@@ -2,11 +2,12 @@
 
 @section('content')
 
-    <section>
-        <a href="{{ route('app.account.index') }}">Back</a>
-
+    <header>
         <h1>Deleted Accounts</h1>
+        <a href="{{ route('app.account.index') }}" class="button">Back</a>
+    </header>
 
+    <section class="panel">
         <table>
             <thead>
             <tr>
@@ -19,14 +20,12 @@
             </thead>
             <tbody>
             @foreach($accounts as $account)
-                <tr data-href="#">
+                <tr>
                     <td><a href="{{ route('app.account.show', $account->id) }}">{{ $account->name }}</a></td>
                     <td>{{ $account->phone }}</td>
                     <td>{{ $account->email }}</td>
                     <td><a href="//{{ $account->website }}">{{ $account->website }}</a></td>
-                    <td>
-                        <a href="{{ route('app.employee.show', $account->user->id) }}">{{ $account->user->name }}</a>
-                    </td>
+                    <td><a href="{{ route('app.employee.show', $account->user->id) }}">{{ $account->user->name }}</a></td>
                 </tr>
             @endforeach
             </tbody>
