@@ -13,7 +13,8 @@
 
 Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
     $resources = [
-        'account' => 'App\AccountController'
+        'account' => 'App\AccountController',
+        'contact' => 'App\ContactController',
     ];
 
     foreach ($resources as $route => $controller) {
@@ -35,6 +36,6 @@ Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 

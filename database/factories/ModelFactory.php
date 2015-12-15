@@ -39,3 +39,23 @@ $factory->define(Curema\Models\App\Account::class, function (Faker\Generator $fa
         'website' => $faker->domainName(),
     ];
 });
+
+$factory->define(Curema\Models\App\Contact::class, function (Faker\Generator $faker) {
+    $faker = Faker\Factory::create('da_DK');
+
+    return [
+        'firstname' => $faker->firstName(),
+        'lastname' => $faker->lastName(),
+        'title' => $faker->randomElement(['Vice President', 'Assistant Developer', 'Developer', 'Account Manager', 'Key Account Manager', 'Supporter']),
+        'street_name' => $faker->streetName(),
+        'street_number' => $faker->buildingNumber(),
+        'city' => $faker->city(),
+        'zip' => $faker->postcode(),
+        'country' => 'Danmark',
+        'phone' => $faker->phoneNumber(),
+        'email' => $faker->email(),
+        'user_id' => $faker->numberBetween(1, 50),
+        'account_id' => $faker->numberBetween(1, 5),
+    ];
+});
+

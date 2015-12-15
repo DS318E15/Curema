@@ -3,17 +3,16 @@
 namespace Curema\Models\App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
-class Account extends Model
+class Contact extends Model
 {
     protected $guarded = [];
 
     public function change($type)
     {
         Change::create([
-            "account_id" => $this->id,
+            "contact_id" => $this->id,
             "user_id" => Auth::user()->id,
             "type" => $type
         ]);
@@ -27,5 +26,10 @@ class Account extends Model
     public function user()
     {
         return $this->belongsTo('Curema\Models\User');
+    }
+
+    public function account()
+    {
+        return $this->belongsTo('Curema\Models\App\Account');
     }
 }

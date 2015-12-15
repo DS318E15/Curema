@@ -17,22 +17,32 @@
             {{ csrf_field() }}
 
             <div class="row">
-                <fieldset class="col-xs-8">
+                <fieldset class="col-xs-4">
                     <label>
-                        Name
-                        <input type="text" name="name">
-                        @if($errors->has('name'))
-                            <small class="error">{{ $errors->first('name') }}</small>
+                        Firstname*
+                        <input type="text" name="firstname">
+                        @if($errors->has('firstname'))
+                            <small class="error">{{ $errors->first('firstname') }}</small>
                         @endif
                     </label>
                 </fieldset>
 
                 <fieldset class="col-xs-4">
                     <label>
-                        CVR
-                        <input type="text" name="cvr">
-                        @if($errors->has('cvr'))
-                            <small class="error">{{ $errors->first('cvr') }}</small>
+                        Lastname*
+                        <input type="text" name="lastname">
+                        @if($errors->has('lastname'))
+                            <small class="error">{{ $errors->first('lastname') }}</small>
+                        @endif
+                    </label>
+                </fieldset>
+
+                <fieldset class="col-xs-4">
+                    <label>
+                        Title
+                        <input type="text" name="title">
+                        @if($errors->has('title'))
+                            <small class="error">{{ $errors->first('title') }}</small>
                         @endif
                     </label>
                 </fieldset>
@@ -63,10 +73,14 @@
             <div class="row">
                 <fieldset class="col-xs-12">
                     <label>
-                        Website
-                        <input type="text" name="website">
-                        @if($errors->has('website'))
-                            <small class="error">{{ $errors->first('website') }}</small>
+                        Account*
+                        <select name="account_id">
+                            @foreach($accounts as $account)
+                                <option value="{{ $account->id }}">{{ $account->name }}</option>
+                            @endforeach
+                        </select>
+                        @if($errors->has('account_id'))
+                            <small class="error">{{ $errors->first('account_id') }}</small>
                         @endif
                     </label>
                 </fieldset>

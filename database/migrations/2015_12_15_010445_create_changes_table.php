@@ -14,6 +14,7 @@ class CreateChangesTable extends Migration
     {
         Schema::create('changes', function (Blueprint $table) {
             $table->increments('id');
+
             $table->string('type');
             $table->string('user_id')->nullable();
             $table->string('account_id')->nullable();
@@ -21,6 +22,7 @@ class CreateChangesTable extends Migration
             $table->string('opportunity_id')->nullable();
             $table->string('lead_id')->nullable();
             $table->string('case_id')->nullable();
+
             $table->timestamps();
         });
     }
