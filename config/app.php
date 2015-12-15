@@ -145,7 +145,7 @@ return [
         Curema\Providers\EventServiceProvider::class,
         Curema\Providers\RouteServiceProvider::class,
         Curema\Providers\ComposerServiceProvider::class,
-        Laravelista\Ekko\EkkoServiceProvider::class
+        Laravelista\Ekko\EkkoServiceProvider::class,
     ],
 
     /*

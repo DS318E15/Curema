@@ -1,4 +1,7 @@
-@import "../../../node_modules/normalize.scss/normalize";
+$enable-flex: true;
+
+@import "../../../node_modules/bootstrap/scss/bootstrap-reboot";
+@import "../../../node_modules/bootstrap/scss/bootstrap-grid";
 @import "../../../public/fonts/icomoon/style";
 
 @import "helpers/colors";
@@ -7,9 +10,11 @@
 @import "modules/button";
 @import "modules/table";
 @import "modules/input";
+@import "modules/alert";
 
 @import "partials/base";
 @import "partials/nav";
 @import "partials/header";
 @import "partials/main";
+
 

@@ -3,13 +3,13 @@ html {
 
   body {
     height: 100%;
-    overflow: hidden;
-    background-color: $mystic;
+    display: flex;
 
     > div {
-      width: calc(100% - 240px);
-      height: 100%;
-      float: left;
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      background-color: $mystic;
     }
   }
 }

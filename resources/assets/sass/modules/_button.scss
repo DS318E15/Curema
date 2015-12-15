@@ -10,12 +10,19 @@ button, .button {
   font-size: .875rem;
   font-weight: 400;
   color: lighten($emperor, 20);
-  text-decoration: none;
   transition: 150ms;
+  text-decoration: none !important;
 
   &:hover {
+    text-decoration: none;
     box-shadow: 0 0 0 1px $ebony-clay;
     color: $ebony-clay;
+  }
+
+  &.submit {
+    width: 100%;
+    background-color: $jungle-green;
+    color: $white;
   }
 }
 

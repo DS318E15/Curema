@@ -23,8 +23,8 @@ Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
         Route::resource($route, $controller, ['except' => 'destroy']);
     }
 
-
     Route::resource('employee', 'App\EmployeeController');
+
     Route::controller('/', 'App\DashboardController', [
         'getIndex' => 'app.dashboard.index'
     ]);

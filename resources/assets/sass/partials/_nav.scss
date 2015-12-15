@@ -1,7 +1,5 @@
 body > nav {
-  width: 240px;
-  height: 100%;
-  float: left;
+  flex: 0 0 240px;
   background-color: $ebony-clay;
 
   > h1 {
@@ -27,14 +25,13 @@ body > nav {
         display: block;
         padding: 0 30px;
         line-height: 54px;
-        box-sizing: border-box;
         border-left: 3px solid darken($ebony-clay, 5);
         border-bottom: 1px solid lighten($ebony-clay, 5);
         color: desaturate(lighten($ebony-clay, 30), 15);
-        text-decoration: none;
         transition: 150ms;
 
         &:hover {
+          text-decoration: none;
           color: lighten($ebony-clay, 60);
         }
 
