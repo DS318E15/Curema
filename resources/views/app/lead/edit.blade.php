@@ -12,15 +12,15 @@
         <section class="col-xs-8">
             <div class="panel">
                 <header>
-                    <a href="{{ route('app.contact.show', $contact->id) }}" class="button">Back</a>
+                    <a href="{{ route('app.lead.show', $lead->id) }}" class="button">Back</a>
                     <form method="POST"
-                          action="{{ route($contact->active ? 'app.contact.destroy' : 'app.contact.restore', $contact->id) }}">
+                          action="{{ route($lead->active ? 'app.lead.destroy' : 'app.lead.restore', $lead->id) }}">
                         {{ csrf_field() }}
-                        <button type="submit">{{ $contact->active ? 'Destroy' : 'Restore' }}</button>
+                        <button type="submit">{{ $lead->active ? 'Destroy' : 'Restore' }}</button>
                     </form>
                 </header>
 
-                <form method="POST" action="{{ route('app.contact.update', $contact->id) }}">
+                <form method="POST" action="{{ route('app.lead.update', $lead->id) }}">
                     {{ method_field('PUT') }}
                     {{ csrf_field() }}
 
@@ -28,7 +28,7 @@
                         <fieldset class="col-xs-8">
                             <label>
                                 Name*
-                                <input type="text" name="name" value="{{ $contact->name }}">
+                                <input type="text" name="name" value="{{ $lead->name }}">
                                 @if($errors->has('name'))
                                     <small class="error">{{ $errors->first('name') }}</small>
                                 @endif
@@ -38,7 +38,7 @@
                         <fieldset class="col-xs-4">
                             <label>
                                 Title
-                                <input type="text" name="title" value="{{ $contact->title }}">
+                                <input type="text" name="title" value="{{ $lead->title }}">
                                 @if($errors->has('title'))
                                     <small class="error">{{ $errors->first('title') }}</small>
                                 @endif
@@ -50,7 +50,7 @@
                         <fieldset class="col-xs-4">
                             <label>
                                 Phone
-                                <input type="text" name="phone" value="{{ $contact->phone }}">
+                                <input type="text" name="phone" value="{{ $lead->phone }}">
                                 @if($errors->has('phone'))
                                     <small class="error">{{ $errors->first('phone') }}</small>
                                 @endif
@@ -60,7 +60,7 @@
                         <fieldset class="col-xs-8">
                             <label>
                                 Email
-                                <input type="text" name="email" value="{{ $contact->email }}">
+                                <input type="text" name="email" value="{{ $lead->email }}">
                                 @if($errors->has('email'))
                                     <small class="error">{{ $errors->first('email') }}</small>
                                 @endif
@@ -71,15 +71,10 @@
                     <div class="row">
                         <fieldset class="col-xs-6">
                             <label>
-                                Account*
-                                <select name="account_id">
-                                    @foreach($accounts as $account)
-                                        <option value="{{ $account->id }}"
-                                                @if($account->id == $contact->account_id) selected @endif>{{ $account->name }}</option>
-                                    @endforeach
-                                </select>
-                                @if($errors->has('account_id'))
-                                    <small class="error">{{ $errors->first('account_id') }}</small>
+                                Company
+                                <input type="text" name="company" value="{{ $lead->company }}">
+                                @if($errors->has('company'))
+                                    <small class="error">{{ $errors->first('company') }}</small>
                                 @endif
                             </label>
                         </fieldset>
@@ -90,7 +85,7 @@
                                 <select name="user_id">
                                     @foreach($users as $user)
                                         <option value="{{ $user->id }}"
-                                                @if($user->id == $contact->user_id) selected @endif>{{ $user->name }}</option>
+                                                @if($user->id == $lead->user_id) selected @endif>{{ $user->name }}</option>
                                     @endforeach
                                 </select>
                                 @if($errors->has('user_id'))
@@ -106,7 +101,7 @@
                         <fieldset class="col-xs-9">
                             <label>
                                 Street Name
-                                <input type="text" name="street_name" value="{{ $contact->street_name }}">
+                                <input type="text" name="street_name" value="{{ $lead->street_name }}">
                                 @if($errors->has('street_name'))
                                     <small class="error">{{ $errors->first('street_name') }}</small>
                                 @endif
@@ -116,7 +111,7 @@
                         <fieldset class="col-xs-3">
                             <label>
                                 Steet No.
-                                <input type="text" name="street_number" value="{{ $contact->street_number }}">
+                                <input type="text" name="street_number" value="{{ $lead->street_number }}">
                                 @if($errors->has('street_number'))
                                     <small class="error">{{ $errors->first('street_number') }}</small>
                                 @endif
@@ -128,7 +123,7 @@
                         <fieldset class="col-xs-2">
                             <label>
                                 Zip
-                                <input type="text" name="zip" value="{{ $contact->zip }}">
+                                <input type="text" name="zip" value="{{ $lead->zip }}">
                                 @if($errors->has('zip'))
                                     <small class="error">{{ $errors->first('zip') }}</small>
                                 @endif
@@ -138,7 +133,7 @@
                         <fieldset class="col-xs-10">
                             <label>
                                 City
-                                <input type="text" name="city" value="{{ $contact->city }}">
+                                <input type="text" name="city" value="{{ $lead->city }}">
                                 @if($errors->has('city'))
                                     <small class="error">{{ $errors->first('city') }}</small>
                                 @endif
@@ -150,7 +145,7 @@
                         <fieldset class="col-xs-12">
                             <label>
                                 Country
-                                <input type="text" name="country" value="{{ $contact->country }}">
+                                <input type="text" name="country" value="{{ $lead->country }}">
                                 @if($errors->has('country'))
                                     <small class="error">{{ $errors->first('country') }}</small>
                                 @endif
@@ -170,18 +165,18 @@
                 <header>
                     <h1>Activities</h1>
                 </header>
-                @foreach($contact->changes as $change)
+                @foreach($lead->changes as $change)
                     <div class="activity">
                         <p>
                             <a href="{{ route('app.employee.show', $change->user_id) }}">{{ $change->user->name }}</a>
                             @if($change->type == "create")
-                                created this contact.
+                                created this lead.
                             @elseif($change->type == "update")
-                                updated this contact.
+                                updated this lead.
                             @elseif($change->type == "destroy")
-                                destroyed this contact.
+                                destroyed this lead.
                             @elseif($change->type == "restore")
-                                restored this contact.
+                                restored this lead.
                             @endif
                         </p>
                         <small>{{ $change->created_at }}</small>

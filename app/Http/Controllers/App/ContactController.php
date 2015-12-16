@@ -32,7 +32,7 @@ class ContactController extends Controller
     {
         return view('app.contact.create', [
             'accounts' => Account::where('active', 1)->get(),
-            'accounts' => Account::where('active', 1)->get(),
+            'users' => User::where('active', 1)->get()
         ]);
     }
 
@@ -45,8 +45,7 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'name' => 'required',
             'account_id' => 'required',
         ]);
 
@@ -96,8 +95,7 @@ class ContactController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'name' => 'required',
             'user_id' => 'required',
             'account_id' => 'required',
         ]);

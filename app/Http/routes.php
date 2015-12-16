@@ -15,6 +15,7 @@ Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
     $resources = [
         'account' => 'App\AccountController',
         'contact' => 'App\ContactController',
+        'lead' => 'App\LeadController',
     ];
 
     foreach ($resources as $route => $controller) {
@@ -24,7 +25,9 @@ Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
         Route::resource($route, $controller, ['except' => 'destroy']);
     }
 
-    Route::resource('employee', 'App\EmployeeController');
+    Route::resource('employee', 'App\EmployeeController', [
+        'only' => ['index', 'show']
+    ]);
 
     Route::controller('/', 'App\DashboardController', [
         'getIndex' => 'app.dashboard.index'

@@ -2,16 +2,14 @@
 
 namespace Curema\Http\Controllers\App;
 
-use Curema\Models\App\Account;
-use Curema\Models\App\Change;
+use Curema\Models\App\Lead;
 use Curema\Models\User;
 use Illuminate\Http\Request;
 
 use Curema\Http\Requests;
 use Curema\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
-class AccountController extends Controller
+class LeadController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +18,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return view('app.account.index', ['accounts' => Account::where('active', 1)->get()]);
+        return view('app.lead.index', ['leads' => Lead::where('active', 1)->get()]);
     }
 
     /**
@@ -30,7 +28,7 @@ class AccountController extends Controller
      */
     public function create()
     {
-        return view('app.account.create', [
+        return view('app.lead.create', [
             'users' => User::where('active', 1)->get(),
         ]);
     }
@@ -45,20 +43,16 @@ class AccountController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'street_name' => 'required',
-            'street_number' => 'required',
-            'city' => 'required',
-            'zip' => 'required',
-            'country' => 'required',
+            'user_id' => 'required',
         ]);
 
-        $account = new Account($request->all());
-        $account->save();
+        $lead = new Lead($request->all());
+        $lead->save();
 
-        $account->change('create');
+        $lead->change('create');
 
-        $request->session()->flash('alert-success', 'Account was successfully created!');
-        return redirect()->route('app.account.show', $account->id);
+        $request->session()->flash('alert-success', 'Lead was successfully created!');
+        return redirect()->route('app.lead.show', $lead->id);
     }
 
     /**
@@ -69,7 +63,7 @@ class AccountController extends Controller
      */
     public function show($id)
     {
-        return view('app.account.show', ['account' => Account::find($id)]);
+        return view('app.lead.show', ['lead' => Lead::find($id)]);
     }
 
     /**
@@ -80,9 +74,9 @@ class AccountController extends Controller
      */
     public function edit($id)
     {
-        return view('app.account.edit', [
+        return view('app.lead.edit', [
             'users' => User::all(),
-            'account' => Account::find($id)
+            'lead' => Lead::find($id)
         ]);
     }
 
@@ -98,20 +92,15 @@ class AccountController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'user_id' => 'required',
-            'street_name' => 'required',
-            'street_number' => 'required',
-            'city' => 'required',
-            'zip' => 'required',
-            'country' => 'required',
         ]);
 
-        $account = Account::find($id);
-        $account->fill($request->all());
-        $account->save();
+        $lead = Lead::find($id);
+        $lead->fill($request->all());
+        $lead->save();
 
-        $account->change('update');
+        $lead->change('update');
 
-        $request->session()->flash('alert-success', 'Account was successfully updated!');
+        $request->session()->flash('alert-success', 'Lead was successfully updated!');
         return redirect()->back();
     }
 
@@ -124,14 +113,14 @@ class AccountController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $account = Account::find($id);
-        $account->active = 0;
-        $account->save();
+        $lead = Lead::find($id);
+        $lead->active = 0;
+        $lead->save();
 
-        $account->change('destroy');
+        $lead->change('destroy');
 
-        $request->session()->flash('alert-success', 'Account was successfully destroyed!');
-        return redirect()->route('app.account.index');
+        $request->session()->flash('alert-success', 'Lead was successfully destroyed!');
+        return redirect()->route('app.lead.index');
     }
 
     /**
@@ -143,13 +132,13 @@ class AccountController extends Controller
      */
     public function restore(Request $request, $id)
     {
-        $account = Account::find($id);
-        $account->active = 1;
-        $account->save();
+        $lead = Lead::find($id);
+        $lead->active = 1;
+        $lead->save();
 
-        $account->change('restore');
+        $lead->change('restore');
 
-        $request->session()->flash('alert-success', 'Account was successfully restored!');
+        $request->session()->flash('alert-success', 'Lead was successfully restored!');
         return redirect()->back();
     }
 
@@ -160,6 +149,6 @@ class AccountController extends Controller
      */
     public function trash()
     {
-        return view('app.account.trash', ['accounts' => Account::where('active', 0)->get()]);
+        return view('app.lead.trash', ['leads' => Lead::where('active', 0)->get()]);
     }
 }

@@ -15,8 +15,15 @@ $factory->define(Curema\Models\User::class, function (Faker\Generator $faker) {
     $faker = Faker\Factory::create('da_DK');
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->email,
+        'name' => $faker->name(),
+        'title' => $faker->randomElement(['Vice President', 'Assistant Developer', 'Developer', 'Account Manager', 'Key Account Manager', 'Supporter']),
+        'street_name' => $faker->streetName(),
+        'street_number' => $faker->buildingNumber(),
+        'city' => $faker->city(),
+        'zip' => $faker->postcode(),
+        'country' => 'Danmark',
+        'phone' => $faker->phoneNumber(),
+        'email' => $faker->email(),
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(60),
     ];
@@ -44,8 +51,7 @@ $factory->define(Curema\Models\App\Contact::class, function (Faker\Generator $fa
     $faker = Faker\Factory::create('da_DK');
 
     return [
-        'firstname' => $faker->firstName(),
-        'lastname' => $faker->lastName(),
+        'name' => $faker->name(),
         'title' => $faker->randomElement(['Vice President', 'Assistant Developer', 'Developer', 'Account Manager', 'Key Account Manager', 'Supporter']),
         'street_name' => $faker->streetName(),
         'street_number' => $faker->buildingNumber(),
@@ -56,6 +62,24 @@ $factory->define(Curema\Models\App\Contact::class, function (Faker\Generator $fa
         'email' => $faker->email(),
         'user_id' => $faker->numberBetween(1, 50),
         'account_id' => $faker->numberBetween(1, 5),
+    ];
+});
+
+$factory->define(Curema\Models\App\Lead::class, function (Faker\Generator $faker) {
+    $faker = Faker\Factory::create('da_DK');
+
+    return [
+        'name' => $faker->name(),
+        'title' => $faker->randomElement(['Vice President', 'Assistant Developer', 'Developer', 'Account Manager', 'Key Account Manager', 'Supporter']),
+        'street_name' => $faker->streetName(),
+        'street_number' => $faker->buildingNumber(),
+        'city' => $faker->city(),
+        'zip' => $faker->postcode(),
+        'country' => 'Danmark',
+        'phone' => $faker->phoneNumber(),
+        'email' => $faker->email(),
+        'company' => $faker->company(),
+        'user_id' => $faker->numberBetween(1, 50),
     ];
 });
 

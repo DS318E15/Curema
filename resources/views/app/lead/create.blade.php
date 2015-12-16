@@ -10,16 +10,16 @@
 
     <div class="panel">
         <header>
-            <a href="{{ route('app.account.index') }}" class="button">Back</a>
+            <a href="{{ route('app.lead.index') }}" class="button">Back</a>
         </header>
 
-        <form method="POST" action="{{ route('app.account.store') }}">
+        <form method="POST" action="{{ route('app.lead.store') }}">
             {{ csrf_field() }}
 
             <div class="row">
                 <fieldset class="col-xs-8">
                     <label>
-                        Name
+                        Name*
                         <input type="text" name="name">
                         @if($errors->has('name'))
                             <small class="error">{{ $errors->first('name') }}</small>
@@ -29,10 +29,10 @@
 
                 <fieldset class="col-xs-4">
                     <label>
-                        CVR
-                        <input type="text" name="cvr">
-                        @if($errors->has('cvr'))
-                            <small class="error">{{ $errors->first('cvr') }}</small>
+                        Title
+                        <input type="text" name="title">
+                        @if($errors->has('title'))
+                            <small class="error">{{ $errors->first('title') }}</small>
                         @endif
                     </label>
                 </fieldset>
@@ -63,10 +63,10 @@
             <div class="row">
                 <fieldset class="col-xs-6">
                     <label>
-                        Website
-                        <input type="text" name="website">
-                        @if($errors->has('website'))
-                            <small class="error">{{ $errors->first('website') }}</small>
+                        Company
+                        <input type="text" name="company">
+                        @if($errors->has('company'))
+                            <small class="error">{{ $errors->first('company') }}</small>
                         @endif
                     </label>
                 </fieldset>

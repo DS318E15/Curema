@@ -31,7 +31,7 @@
             <tbody>
             @foreach($contacts as $contact)
                 <tr>
-                    <td><a href="{{ route('app.contact.show', $contact->id) }}">{{ $contact->firstname }} {{ $contact->lastname }}</a></td>
+                    <td><a href="{{ route('app.contact.show', $contact->id) }}">{{ $contact->name }}</a></td>
                     <td><a href="{{ route('app.account.show', $contact->account->id) }}">{{ $contact->account->name }}</a></td>
                     <td>{{ $contact->phone }}</td>
                     <td>{{ $contact->email }}</td>
