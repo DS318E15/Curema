@@ -21,7 +21,7 @@ class CreateChangesTable extends Migration
             $table->string('contact_id')->nullable();
             $table->string('opportunity_id')->nullable();
             $table->string('lead_id')->nullable();
-            $table->string('case_id')->nullable();
+            $table->string('ticket_id')->nullable();
 
             $table->timestamps();
         });

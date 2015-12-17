@@ -1367,6 +1367,13 @@ fieldset {
     border-radius: 3px;
     border: 1px solid #858585;
     font-weight: 300; }
+  fieldset textarea {
+    display: block;
+    height: 200px;
+    width: 100%;
+    padding: 5px 15px;
+    border-radius: 3px;
+    border: 1px solid #858585; }
   fieldset .error {
     color: #a5232d;
     font-weight: 500; }

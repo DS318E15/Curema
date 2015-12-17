@@ -3,7 +3,7 @@
 @section('content')
 
     <header>
-        <h1>Destroyed opportunitys</h1>
+        <h1>Destroyed Opportunities</h1>
         <a href="{{ route('app.opportunity.index') }}" class="button">Back</a>
     </header>
 

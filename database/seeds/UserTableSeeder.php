@@ -50,6 +50,6 @@ class UserTableSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
 
-        factory(Curema\Models\User::class, 49)->create();
+        factory(Curema\Models\User::class, 27)->create();
     }
 }

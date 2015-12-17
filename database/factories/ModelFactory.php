@@ -95,3 +95,16 @@ $factory->define(Curema\Models\App\Opportunity::class, function (Faker\Generator
         'closing_at' => $faker->dateTime(),
     ];
 });
+
+
+$factory->define(Curema\Models\App\Ticket::class, function (Faker\Generator $faker) {
+    $faker = Faker\Factory::create('da_DK');
+
+    return [
+        'subject' => $faker->sentence(6),
+        'description' => $faker->paragraph(),
+        'user_id' => $faker->numberBetween(1, 30),
+        'contact_id' => $faker->numberBetween(1, 10),
+        'account_id' => $faker->numberBetween(1, 5),
+    ];
+});
