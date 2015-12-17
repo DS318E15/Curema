@@ -4,9 +4,9 @@ body {
 }
 
 a {
-  color: $emperor;
+  color: $emperor !important;
 
   &:hover {
-    color: $ebony-clay;
+    color: $ebony-clay !important;
   }
 }

@@ -54,7 +54,11 @@ class TicketController extends Controller
         $ticket = new Ticket($request->all());
         $ticket->save();
 
-        $ticket->change('create');
+        Change::create([
+            "ticket_id" => $ticket->id,
+            "user_id" => Auth::user()->id,
+            "type" => "create"
+        ]);
 
         $request->session()->flash('alert-success', 'Ticket was successfully created!');
         return redirect()->route('app.ticket.show', $ticket->id);
@@ -106,7 +110,11 @@ class TicketController extends Controller
         $ticket->fill($request->all());
         $ticket->save();
 
-        $ticket->change('update');
+        Change::create([
+            "ticket_id" => $ticket->id,
+            "user_id" => Auth::user()->id,
+            "type" => "update"
+        ]);
 
         $request->session()->flash('alert-success', 'Ticket was successfully updated!');
         return redirect()->back();
@@ -125,7 +133,11 @@ class TicketController extends Controller
         $ticket->active = 0;
         $ticket->save();
 
-        $ticket->change('destroy');
+        Change::create([
+            "ticket_id" => $ticket->id,
+            "user_id" => Auth::user()->id,
+            "type" => "destroy"
+        ]);
 
         $request->session()->flash('alert-success', 'Ticket was successfully destroyed!');
         return redirect()->route('app.ticket.index');
@@ -144,7 +156,11 @@ class TicketController extends Controller
         $ticket->active = 1;
         $ticket->save();
 
-        $ticket->change('restore');
+        Change::create([
+            "ticket_id" => $ticket->id,
+            "user_id" => Auth::user()->id,
+            "type" => "restore"
+        ]);
 
         $request->session()->flash('alert-success', 'Ticket was successfully restored!');
         return redirect()->back();

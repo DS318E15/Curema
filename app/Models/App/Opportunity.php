@@ -3,20 +3,10 @@
 namespace Curema\Models\App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 
 class Opportunity extends Model
 {
     protected $guarded = [];
-
-    public function change($type)
-    {
-        Change::create([
-            "opportunity_id" => $this->id,
-            "user_id" => Auth::user()->id,
-            "type" => $type,
-        ]);
-    }
 
     public function changes()
     {

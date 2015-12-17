@@ -27,14 +27,13 @@ body > nav {
         line-height: 54px;
         border-left: 3px solid darken($ebony-clay, 5);
         border-bottom: 1px solid lighten($ebony-clay, 5);
-        color: desaturate(lighten($ebony-clay, 30), 15);
+        color: desaturate(lighten($ebony-clay, 30), 15) !important;
+        text-decoration: none !important;
         transition: 150ms;
 
         &:hover {
-          text-decoration: none;
-          color: lighten($ebony-clay, 60);
+          color: lighten($ebony-clay, 60) !important;
         }
-
 
         &.active {
           border-left-color: $jungle-green;

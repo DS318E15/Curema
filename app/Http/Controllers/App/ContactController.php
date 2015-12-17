@@ -53,7 +53,11 @@ class ContactController extends Controller
         $contact->user_id = Auth::user()->id;
         $contact->save();
 
-        $contact->change('create');
+        Change::create([
+            "contact_id" => $contact->id,
+            "user_id" => Auth::user()->id,
+            "type" => "create"
+        ]);
 
         $request->session()->flash('alert-success', 'Contact was successfully created!');
         return redirect()->route('app.contact.show', $contact->id);
@@ -104,7 +108,11 @@ class ContactController extends Controller
         $contact->fill($request->all());
         $contact->save();
 
-        $contact->change('update');
+        Change::create([
+            "contact_id" => $contact->id,
+            "user_id" => Auth::user()->id,
+            "type" => "update"
+        ]);
 
         $request->session()->flash('alert-success', 'Contact was successfully updated!');
         return redirect()->back();
@@ -123,7 +131,11 @@ class ContactController extends Controller
         $contact->active = 0;
         $contact->save();
 
-        $contact->change('destroy');
+        Change::create([
+            "contact_id" => $contact->id,
+            "user_id" => Auth::user()->id,
+            "type" => "destroy"
+        ]);
 
         $request->session()->flash('alert-success', 'Contact was successfully destroyed!');
         return redirect()->route('app.contact.index');
@@ -142,7 +154,11 @@ class ContactController extends Controller
         $contact->active = 1;
         $contact->save();
 
-        $contact->change('restore');
+        Change::create([
+            "contact_id" => $contact->id,
+            "user_id" => Auth::user()->id,
+            "type" => "restore"
+        ]);
 
         $request->session()->flash('alert-success', 'Contact was successfully restored!');
         return redirect()->back();

@@ -1293,9 +1293,9 @@ body {
   color: #525252; }
 
 a {
-  color: #525252; }
+  color: #525252 !important; }
   a:hover {
-    color: #252d3a; }
+    color: #252d3a !important; }
 
 button, .button {
   height: 40px;
@@ -1477,11 +1477,11 @@ body > nav {
       line-height: 54px;
       border-left: 3px solid #1b212a;
       border-bottom: 1px solid #2f394a;
-      color: #737a85;
+      color: #737a85 !important;
+      text-decoration: none !important;
       transition: 150ms; }
       body > nav > ul li a:hover {
-        text-decoration: none;
-        color: #bcc6d5; }
+        color: #bcc6d5 !important; }
       body > nav > ul li a.active {
         border-left-color: #24a79f;
         color: #dce0e8; }

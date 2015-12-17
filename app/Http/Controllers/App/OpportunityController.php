@@ -52,7 +52,11 @@ class OpportunityController extends Controller
         $opportunity = new Opportunity($request->all());
         $opportunity->save();
 
-        $opportunity->change('create');
+        Change::create([
+            "opportunity_id" => $opportunity->id,
+            "user_id" => Auth::user()->id,
+            "type" => "create",
+        ]);
 
         $request->session()->flash('alert-success', 'Opportunity was successfully created!');
         return redirect()->route('app.opportunity.show', $opportunity->id);
@@ -103,7 +107,11 @@ class OpportunityController extends Controller
         $opportunity->fill($request->all());
         $opportunity->save();
 
-        $opportunity->change('update');
+        Change::create([
+            "opportunity_id" => $opportunity->id,
+            "user_id" => Auth::user()->id,
+            "type" => "update",
+        ]);
 
         $request->session()->flash('alert-success', 'Opportunity was successfully updated!');
         return redirect()->back();
@@ -122,7 +130,11 @@ class OpportunityController extends Controller
         $opportunity->active = 0;
         $opportunity->save();
 
-        $opportunity->change('destroy');
+        Change::create([
+            "opportunity_id" => $opportunity->id,
+            "user_id" => Auth::user()->id,
+            "type" => "destroy",
+        ]);
 
         $request->session()->flash('alert-success', 'Opportunity was successfully destroyed!');
         return redirect()->route('app.opportunity.index');
@@ -141,7 +153,11 @@ class OpportunityController extends Controller
         $opportunity->active = 1;
         $opportunity->save();
 
-        $opportunity->change('restore');
+        Change::create([
+            "opportunity_id" => $opportunity->id,
+            "user_id" => Auth::user()->id,
+            "type" => "restore",
+        ]);
 
         $request->session()->flash('alert-success', 'Opportunity was successfully restored!');
         return redirect()->back();
