@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AccountTableSeeder::class);
         $this->call(ContactTableSeeder::class);
         $this->call(LeadTableSeeder::class);
+        $this->call(OpportunityTableSeeder::class);
+        $this->call(OpportunityStageTableSeeder::class);
 
         Model::reguard();
     }

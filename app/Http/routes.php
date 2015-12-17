@@ -13,9 +13,10 @@
 
 Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
     $resources = [
+        'opportunity' => 'App\OpportunityController',
+        'lead' => 'App\LeadController',
         'account' => 'App\AccountController',
         'contact' => 'App\ContactController',
-        'lead' => 'App\LeadController',
     ];
 
     foreach ($resources as $route => $controller) {

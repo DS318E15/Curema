@@ -80,7 +80,8 @@
                         Owner*
                         <select name="user_id">
                             @foreach($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                <option value="{{ $user->id }}"
+                                        @if($user->id == Auth::user()->id) selected @endif>{{ $user->name }}</option>
                             @endforeach
                         </select>
                         @if($errors->has('user_id'))

@@ -80,8 +80,8 @@
                                         @if($user->id == Auth::user()->id) selected @endif>{{ $user->name }}</option>
                             @endforeach
                         </select>
-                        @if($errors->has('company'))
-                            <small class="error">{{ $errors->first('company') }}</small>
+                        @if($errors->has('user_id'))
+                            <small class="error">{{ $errors->first('user_id') }}</small>
                         @endif
                     </label>
                 </fieldset>

@@ -4,6 +4,10 @@
            class="{{ Ekko::areActiveRoutes(['app.dashboard.index']) }}">Dashboard</a>
     </li>
     <li>
+        <a href="{{ route('app.opportunity.index') }}"
+           class="{{ Ekko::areActiveRoutes(['app.opportunity.index', 'app.opportunity.create', 'app.opportunity.show', 'app.opportunity.edit', 'app.opportunity.trash']) }}">Opportunities</a>
+    </li>
+    <li>
         <a href="{{ route('app.lead.index') }}"
            class="{{ Ekko::areActiveRoutes(['app.lead.index', 'app.lead.create', 'app.lead.show', 'app.lead.edit', 'app.lead.trash']) }}">Leads</a>
     </li>

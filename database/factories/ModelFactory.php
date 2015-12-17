@@ -83,3 +83,15 @@ $factory->define(Curema\Models\App\Lead::class, function (Faker\Generator $faker
     ];
 });
 
+$factory->define(Curema\Models\App\Opportunity::class, function (Faker\Generator $faker) {
+    $faker = Faker\Factory::create('da_DK');
+
+    return [
+        'name' => 'Widgets ' . ($faker->randomDigit() + 1) * 100,
+        'amount' => ($faker->randomDigit() + 1) * 10000,
+        'opportunity_stage_id' => $faker->numberBetween(1, 4),
+        'user_id' => $faker->numberBetween(1, 50),
+        'account_id' => $faker->numberBetween(1, 5),
+        'closing_at' => $faker->dateTime(),
+    ];
+});
