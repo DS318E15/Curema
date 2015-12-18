@@ -94,23 +94,7 @@
                 <header>
                     <h1>Activities</h1>
                 </header>
-                @foreach($opportunity->changes as $change)
-                    <div class="activity">
-                        <p>
-                            <a href="{{ route('app.employee.show', $change->user_id) }}">{{ $change->user->name }}</a>
-                            @if($change->type == "create")
-                                created this opportunity.
-                            @elseif($change->type == "update")
-                                updated this opportunity.
-                            @elseif($change->type == "destroy")
-                                destroyed this opportunity.
-                            @elseif($change->type == "restore")
-                                restored this opportunity.
-                            @endif
-                        </p>
-                        <small>{{ $change->created_at }}</small>
-                    </div>
-                @endforeach
+                @include('app.opportunity.activity')
             </div>
         </section>
     </div>

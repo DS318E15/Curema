@@ -116,23 +116,7 @@
                 <header>
                     <h1>Activities</h1>
                 </header>
-                @foreach($email->changes as $change)
-                    <div class="activity">
-                        <p>
-                            <a href="{{ route('app.employee.show', $change->user_id) }}">{{ $change->user->name }}</a>
-                            @if($change->type == "create")
-                                created this email.
-                            @elseif($change->type == "update")
-                                updated this email.
-                            @elseif($change->type == "destroy")
-                                destroyed this email.
-                            @elseif($change->type == "restore")
-                                restored this email.
-                            @endif
-                        </p>
-                        <small>{{ $change->created_at }}</small>
-                    </div>
-                @endforeach
+                @include('app.email.activity')
             </div>
         </section>
     </div>

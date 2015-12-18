@@ -73,23 +73,8 @@
                 <header>
                     <h1>Activities</h1>
                 </header>
-                @foreach($account->changes as $change)
-                    <div class="activity">
-                        <p>
-                            <a href="{{ route('app.employee.show', $change->user_id) }}">{{ $change->user->name }}</a>
-                            @if($change->type == "create")
-                                created this account.
-                            @elseif($change->type == "update")
-                                updated this account.
-                            @elseif($change->type == "destroy")
-                                destroyed this account.
-                            @elseif($change->type == "restore")
-                                restored this account.
-                            @endif
-                        </p>
-                        <small>{{ $change->created_at }}</small>
-                    </div>
-                @endforeach
+
+                @include('app.account.activity')
             </div>
         </section>
     </div>

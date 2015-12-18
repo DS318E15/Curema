@@ -50,9 +50,9 @@ class LeadController extends Controller
         $lead->save();
 
         Change::create([
+            "type" => "create",
             "lead_id" => $lead->id,
             "user_id" => Auth::user()->id,
-            "type" => "create",
         ]);
 
         $request->session()->flash('alert-success', 'Lead was successfully created!');
@@ -103,9 +103,9 @@ class LeadController extends Controller
         $lead->save();
 
         Change::create([
+            "type" => "update",
             "lead_id" => $lead->id,
             "user_id" => Auth::user()->id,
-            "type" => "update",
         ]);
 
         $request->session()->flash('alert-success', 'Lead was successfully updated!');
@@ -126,9 +126,9 @@ class LeadController extends Controller
         $lead->save();
 
         Change::create([
+            "type" => "destroy",
             "lead_id" => $lead->id,
             "user_id" => Auth::user()->id,
-            "type" => "destroy",
         ]);
 
         $request->session()->flash('alert-success', 'Lead was successfully destroyed!');
@@ -149,9 +149,9 @@ class LeadController extends Controller
         $lead->save();
 
         Change::create([
+            "type" => "restore",
             "lead_id" => $lead->id,
             "user_id" => Auth::user()->id,
-            "type" => "restore",
         ]);
 
         $request->session()->flash('alert-success', 'Lead was successfully restored!');

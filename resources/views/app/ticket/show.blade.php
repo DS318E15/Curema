@@ -73,23 +73,7 @@
                 <header>
                     <h1>Activities</h1>
                 </header>
-                @foreach($ticket->changes as $change)
-                    <div class="activity">
-                        <p>
-                            <a href="{{ route('app.employee.show', $change->user_id) }}">{{ $change->user->name }}</a>
-                            @if($change->type == "create")
-                                created this ticket.
-                            @elseif($change->type == "update")
-                                updated this ticket.
-                            @elseif($change->type == "destroy")
-                                destroyed this ticket.
-                            @elseif($change->type == "restore")
-                                restored this ticket.
-                            @endif
-                        </p>
-                        <small>{{ $change->created_at }}</small>
-                    </div>
-                @endforeach
+                @include('app.ticket.activity')
             </div>
         </section>
     </div>

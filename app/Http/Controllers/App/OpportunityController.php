@@ -3,12 +3,14 @@
 namespace Curema\Http\Controllers\App;
 
 use Curema\Models\App\Account;
+use Curema\Models\App\Change;
 use Curema\Models\App\Opportunity;
 use Curema\Models\User;
 use Illuminate\Http\Request;
 
 use Curema\Http\Requests;
 use Curema\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class OpportunityController extends Controller
 {
@@ -53,9 +55,10 @@ class OpportunityController extends Controller
         $opportunity->save();
 
         Change::create([
-            "opportunity_id" => $opportunity->id,
-            "user_id" => Auth::user()->id,
             "type" => "create",
+            "opportunity_id" => $opportunity->id,
+            "account_id" => $opportunity->account_id,
+            "user_id" => Auth::user()->id,
         ]);
 
         $request->session()->flash('alert-success', 'Opportunity was successfully created!');
@@ -70,7 +73,9 @@ class OpportunityController extends Controller
      */
     public function show($id)
     {
-        return view('app.opportunity.show', ['opportunity' => Opportunity::find($id)]);
+        return view('app.opportunity.show', [
+            'opportunity' => Opportunity::find($id),
+        ]);
     }
 
     /**
@@ -84,7 +89,7 @@ class OpportunityController extends Controller
         return view('app.opportunity.edit', [
             'users' => User::all(),
             'accounts' => Account::all(),
-            'opportunity' => Opportunity::find($id)
+            'opportunity' => Opportunity::find($id),
         ]);
     }
 
@@ -108,9 +113,10 @@ class OpportunityController extends Controller
         $opportunity->save();
 
         Change::create([
-            "opportunity_id" => $opportunity->id,
-            "user_id" => Auth::user()->id,
             "type" => "update",
+            "opportunity_id" => $opportunity->id,
+            "account_id" => $opportunity->account_id,
+            "user_id" => Auth::user()->id,
         ]);
 
         $request->session()->flash('alert-success', 'Opportunity was successfully updated!');
@@ -131,9 +137,10 @@ class OpportunityController extends Controller
         $opportunity->save();
 
         Change::create([
-            "opportunity_id" => $opportunity->id,
-            "user_id" => Auth::user()->id,
             "type" => "destroy",
+            "opportunity_id" => $opportunity->id,
+            "account_id" => $opportunity->account_id,
+            "user_id" => Auth::user()->id,
         ]);
 
         $request->session()->flash('alert-success', 'Opportunity was successfully destroyed!');
@@ -154,9 +161,10 @@ class OpportunityController extends Controller
         $opportunity->save();
 
         Change::create([
-            "opportunity_id" => $opportunity->id,
-            "user_id" => Auth::user()->id,
             "type" => "restore",
+            "opportunity_id" => $opportunity->id,
+            "account_id" => $opportunity->account_id,
+            "user_id" => Auth::user()->id,
         ]);
 
         $request->session()->flash('alert-success', 'Opportunity was successfully restored!');

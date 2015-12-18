@@ -56,9 +56,9 @@ class AccountController extends Controller
         $account->save();
 
         Change::create([
+            "type" => "create",
             "account_id" => $account->id,
             "user_id" => Auth::user()->id,
-            "type" => "create"
         ]);
 
         $request->session()->flash('alert-success', 'Account was successfully created!');
@@ -73,7 +73,9 @@ class AccountController extends Controller
      */
     public function show($id)
     {
-        return view('app.account.show', ['account' => Account::find($id)]);
+        return view('app.account.show', [
+            'account' => Account::find($id)
+        ]);
     }
 
     /**
@@ -115,9 +117,9 @@ class AccountController extends Controller
         $account->save();
 
         Change::create([
+            "type" => "update",
             "account_id" => $account->id,
             "user_id" => Auth::user()->id,
-            "type" => "update"
         ]);
 
         $request->session()->flash('alert-success', 'Account was successfully updated!');
@@ -138,9 +140,9 @@ class AccountController extends Controller
         $account->save();
 
         Change::create([
+            "type" => "destroy",
             "account_id" => $account->id,
             "user_id" => Auth::user()->id,
-            "type" => "destroy"
         ]);
 
         $request->session()->flash('alert-success', 'Account was successfully destroyed!');
@@ -161,9 +163,9 @@ class AccountController extends Controller
         $account->save();
 
         Change::create([
+            "type" => "restore",
             "account_id" => $account->id,
             "user_id" => Auth::user()->id,
-            "type" => "restore"
         ]);
 
         $request->session()->flash('alert-success', 'Account was successfully restored!');

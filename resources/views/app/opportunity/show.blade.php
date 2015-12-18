@@ -44,12 +44,16 @@
 
                 <div class="input">
                     Account:
-                    <div><a href="{{ route('app.account.show', $opportunity->account->id) }}">{{ $opportunity->account->name }}</a></div>
+                    <div>
+                        <a href="{{ route('app.account.show', $opportunity->account->id) }}">{{ $opportunity->account->name }}</a>
+                    </div>
                 </div>
 
                 <div class="input">
                     Owner:
-                    <div><a href="{{ route('app.employee.show', $opportunity->user->id) }}">{{ $opportunity->user->name }}</a></div>
+                    <div>
+                        <a href="{{ route('app.employee.show', $opportunity->user->id) }}">{{ $opportunity->user->name }}</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -59,23 +63,7 @@
                 <header>
                     <h1>Activities</h1>
                 </header>
-                @foreach($opportunity->changes as $change)
-                    <div class="activity">
-                        <p>
-                            <a href="{{ route('app.employee.show', $change->user_id) }}">{{ $change->user->name }}</a>
-                            @if($change->type == "create")
-                                created this opportunity.
-                            @elseif($change->type == "update")
-                                updated this opportunity.
-                            @elseif($change->type == "destroy")
-                                destroyed this opportunity.
-                            @elseif($change->type == "restore")
-                                restored this opportunity.
-                            @endif
-                        </p>
-                        <small>{{ $change->created_at }}</small>
-                    </div>
-                @endforeach
+                @include('app.opportunity.activity')
             </div>
         </section>
     </div>

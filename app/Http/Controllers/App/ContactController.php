@@ -3,6 +3,7 @@
 namespace Curema\Http\Controllers\App;
 
 use Curema\Models\App\Account;
+use Curema\Models\App\Change;
 use Curema\Models\App\Contact;
 use Curema\Models\User;
 use Illuminate\Http\Request;
@@ -54,9 +55,10 @@ class ContactController extends Controller
         $contact->save();
 
         Change::create([
+            "type" => "create",
             "contact_id" => $contact->id,
+            "account_id" => $contact->account_id,
             "user_id" => Auth::user()->id,
-            "type" => "create"
         ]);
 
         $request->session()->flash('alert-success', 'Contact was successfully created!');
@@ -109,9 +111,10 @@ class ContactController extends Controller
         $contact->save();
 
         Change::create([
+            "type" => "update",
             "contact_id" => $contact->id,
+            "account_id" => $contact->account_id,
             "user_id" => Auth::user()->id,
-            "type" => "update"
         ]);
 
         $request->session()->flash('alert-success', 'Contact was successfully updated!');
@@ -132,9 +135,10 @@ class ContactController extends Controller
         $contact->save();
 
         Change::create([
+            "type" => "destroy",
             "contact_id" => $contact->id,
+            "account_id" => $contact->account_id,
             "user_id" => Auth::user()->id,
-            "type" => "destroy"
         ]);
 
         $request->session()->flash('alert-success', 'Contact was successfully destroyed!');
@@ -155,9 +159,10 @@ class ContactController extends Controller
         $contact->save();
 
         Change::create([
+            "type" => "restore",
             "contact_id" => $contact->id,
+            "account_id" => $contact->account_id,
             "user_id" => Auth::user()->id,
-            "type" => "restore"
         ]);
 
         $request->session()->flash('alert-success', 'Contact was successfully restored!');

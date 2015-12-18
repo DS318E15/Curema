@@ -58,9 +58,12 @@ class EmailController extends Controller
         $email->save();
 
         Change::create([
+            "type" => "create",
             "email_id" => $email->id,
+            "lead_id" => $email->lead_id,
+            "contact_id" => $email->contact_id,
+            "account_id" => $email->account_id,
             "user_id" => Auth::user()->id,
-            "type" => "create"
         ]);
 
         $request->session()->flash('alert-success', 'Email was successfully created!');
@@ -114,9 +117,12 @@ class EmailController extends Controller
         $email->save();
 
         Change::create([
+            "type" => "update",
             "email_id" => $email->id,
+            "lead_id" => $email->lead_id,
+            "contact_id" => $email->contact_id,
+            "account_id" => $email->account_id,
             "user_id" => Auth::user()->id,
-            "type" => "update"
         ]);
 
         $request->session()->flash('alert-success', 'Email was successfully updated!');

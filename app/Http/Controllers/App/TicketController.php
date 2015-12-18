@@ -3,6 +3,7 @@
 namespace Curema\Http\Controllers\App;
 
 use Curema\Models\App\Account;
+use Curema\Models\App\Change;
 use Curema\Models\App\Contact;
 use Curema\Models\App\Ticket;
 use Curema\Models\User;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 
 use Curema\Http\Requests;
 use Curema\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
 {
@@ -55,9 +57,11 @@ class TicketController extends Controller
         $ticket->save();
 
         Change::create([
+            "type" => "create",
             "ticket_id" => $ticket->id,
+            "account_id" => $ticket->account_id,
+            "contact_id" => $ticket->contact_id,
             "user_id" => Auth::user()->id,
-            "type" => "create"
         ]);
 
         $request->session()->flash('alert-success', 'Ticket was successfully created!');
@@ -111,9 +115,11 @@ class TicketController extends Controller
         $ticket->save();
 
         Change::create([
+            "type" => "update",
             "ticket_id" => $ticket->id,
+            "account_id" => $ticket->account_id,
+            "contact_id" => $ticket->contact_id,
             "user_id" => Auth::user()->id,
-            "type" => "update"
         ]);
 
         $request->session()->flash('alert-success', 'Ticket was successfully updated!');
@@ -134,9 +140,11 @@ class TicketController extends Controller
         $ticket->save();
 
         Change::create([
+            "type" => "destroy",
             "ticket_id" => $ticket->id,
+            "account_id" => $ticket->account_id,
+            "contact_id" => $ticket->contact_id,
             "user_id" => Auth::user()->id,
-            "type" => "destroy"
         ]);
 
         $request->session()->flash('alert-success', 'Ticket was successfully destroyed!');
@@ -157,9 +165,11 @@ class TicketController extends Controller
         $ticket->save();
 
         Change::create([
+            "type" => "restore",
             "ticket_id" => $ticket->id,
+            "account_id" => $ticket->account_id,
+            "contact_id" => $ticket->contact_id,
             "user_id" => Auth::user()->id,
-            "type" => "restore"
         ]);
 
         $request->session()->flash('alert-success', 'Ticket was successfully restored!');

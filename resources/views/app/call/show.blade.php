@@ -48,23 +48,7 @@
                 <header>
                     <h1>Activities</h1>
                 </header>
-                @foreach($call->changes as $change)
-                    <div class="activity">
-                        <p>
-                            <a href="{{ route('app.employee.show', $change->user_id) }}">{{ $change->user->name }}</a>
-                            @if($change->type == "create")
-                                created this call.
-                            @elseif($change->type == "update")
-                                updated this call.
-                            @elseif($change->type == "destroy")
-                                destroyed this call.
-                            @elseif($change->type == "restore")
-                                restored this call.
-                            @endif
-                        </p>
-                        <small>{{ $change->created_at }}</small>
-                    </div>
-                @endforeach
+                @include('app.call.activity')
             </div>
         </section>
     </div>

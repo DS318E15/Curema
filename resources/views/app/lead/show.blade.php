@@ -68,23 +68,7 @@
                 <header>
                     <h1>Activities</h1>
                 </header>
-                @foreach($lead->changes as $change)
-                    <div class="activity">
-                        <p>
-                            <a href="{{ route('app.employee.show', $change->user_id) }}">{{ $change->user->name }}</a>
-                            @if($change->type == "create")
-                                created this lead.
-                            @elseif($change->type == "update")
-                                updated this lead.
-                            @elseif($change->type == "destroy")
-                                destroyed this lead.
-                            @elseif($change->type == "restore")
-                                restored this lead.
-                            @endif
-                        </p>
-                        <small>{{ $change->created_at }}</small>
-                    </div>
-                @endforeach
+                @include('app.lead.activity')
             </div>
         </section>
     </div>

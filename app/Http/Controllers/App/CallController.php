@@ -50,7 +50,7 @@ class CallController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'description' => 'required',
+            'content' => 'required',
             'user_id' => 'required',
         ]);
 
@@ -58,9 +58,12 @@ class CallController extends Controller
         $call->save();
 
         Change::create([
+            "type" => "create",
             "call_id" => $call->id,
+            "lead_id" => $call->lead_id,
+            "contact_id" => $call->contact_id,
+            "account_id" => $call->account_id,
             "user_id" => Auth::user()->id,
-            "type" => "create"
         ]);
 
         $request->session()->flash('alert-success', 'Call was successfully created!');
@@ -114,9 +117,12 @@ class CallController extends Controller
         $call->save();
 
         Change::create([
+            "type" => "update",
             "call_id" => $call->id,
+            "lead_id" => $call->lead_id,
+            "contact_id" => $call->contact_id,
+            "account_id" => $call->account_id,
             "user_id" => Auth::user()->id,
-            "type" => "update"
         ]);
 
         $request->session()->flash('alert-success', 'Call was successfully updated!');
