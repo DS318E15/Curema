@@ -3,7 +3,7 @@
 namespace Curema\Http\Controllers\App;
 
 use Curema\Models\App\Account;
-use Curema\Models\App\call;
+use Curema\Models\App\email;
 use Curema\Models\App\Change;
 use Curema\Models\App\Contact;
 use Curema\Models\App\Lead;
@@ -14,7 +14,7 @@ use Curema\Http\Requests;
 use Curema\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class CallController extends Controller
+class EmailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +23,7 @@ class CallController extends Controller
      */
     public function index()
     {
-        return view('app.call.index', ['calls' => Call::all()]);
+        return view('app.email.index', ['emails' => Email::all()]);
     }
 
     /**
@@ -33,7 +33,7 @@ class CallController extends Controller
      */
     public function create()
     {
-        return view('app.call.create', [
+        return view('app.email.create', [
             'leads' => Lead::all(),
             'accounts' => Account::all(),
             'contacts' => Contact::all(),
@@ -54,17 +54,17 @@ class CallController extends Controller
             'user_id' => 'required',
         ]);
 
-        $call = new Call($request->all());
-        $call->save();
+        $email = new Email($request->all());
+        $email->save();
 
         Change::create([
-            "call_id" => $call->id,
+            "email_id" => $email->id,
             "user_id" => Auth::user()->id,
             "type" => "create"
         ]);
 
-        $request->session()->flash('alert-success', 'Call was successfully created!');
-        return redirect()->route('app.call.show', $call->id);
+        $request->session()->flash('alert-success', 'Email was successfully created!');
+        return redirect()->route('app.email.show', $email->id);
     }
 
     /**
@@ -75,7 +75,7 @@ class CallController extends Controller
      */
     public function show($id)
     {
-        return view('app.call.show', ['call' => Call::find($id)]);
+        return view('app.email.show', ['email' => Email::find($id)]);
     }
 
     /**
@@ -86,8 +86,8 @@ class CallController extends Controller
      */
     public function edit($id)
     {
-        return view('app.call.edit', [
-            'call' => Call::find($id),
+        return view('app.email.edit', [
+            'email' => Email::find($id),
             'leads' => Lead::all(),
             'accounts' => Account::all(),
             'contacts' => Contact::all(),
@@ -109,17 +109,17 @@ class CallController extends Controller
             'content' => 'required',
         ]);
 
-        $call = Call::find($id);
-        $call->fill($request->all());
-        $call->save();
+        $email = Email::find($id);
+        $email->fill($request->all());
+        $email->save();
 
         Change::create([
-            "call_id" => $call->id,
+            "email_id" => $email->id,
             "user_id" => Auth::user()->id,
             "type" => "update"
         ]);
 
-        $request->session()->flash('alert-success', 'Call was successfully updated!');
+        $request->session()->flash('alert-success', 'Email was successfully updated!');
         return redirect()->back();
     }
 }

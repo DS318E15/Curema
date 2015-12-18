@@ -29,6 +29,10 @@
     </li>
     <li>
         <a href="{{ route('app.call.index') }}"
-           class="{{ Ekko::areActiveRoutes(['app.call.index', 'app.call.create', 'app.call.show', 'app.call.edit', 'app.call.trash']) }}">Calls</a>
+           class="{{ Ekko::areActiveRoutes(['app.call.index', 'app.call.create', 'app.call.show', 'app.call.edit']) }}">Calls</a>
+    </li>
+    <li>
+        <a href="{{ route('app.email.index') }}"
+           class="{{ Ekko::areActiveRoutes(['app.email.index', 'app.email.create', 'app.email.show', 'app.email.edit']) }}">Emails</a>
     </li>
 </ul>

@@ -18,7 +18,6 @@ Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
         'account' => 'App\AccountController',
         'contact' => 'App\ContactController',
         'ticket' => 'App\TicketController',
-        'call' => 'App\CallController',
     ];
 
     foreach ($resources as $route => $controller) {
@@ -27,6 +26,9 @@ Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
         Route::get($route . '/trash', ['uses' => $controller . '@trash', 'as' => 'app.' . $route . '.trash']);
         Route::resource($route, $controller, ['except' => 'destroy']);
     }
+
+    Route::resource('call', 'App\CallController');
+    Route::resource('email', 'App\EmailController');
 
     Route::resource('employee', 'App\EmployeeController', [
         'only' => ['index', 'show']

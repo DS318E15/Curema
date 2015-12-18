@@ -5,10 +5,7 @@
     <header>
         <h1>Calls</h1>
 
-        <div class="button-group">
-            <a href="{{ route('app.call.create') }}" class="button">Create</a>
-            <a href="{{ route('app.call.trash') }}" class="button icon-trash"></a>
-        </div>
+        <a href="{{ route('app.call.create') }}" class="button">Create</a>
     </header>
 
     @if(Session::has('alert-success'))
