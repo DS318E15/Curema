@@ -3,7 +3,7 @@
 namespace Curema\Http\Controllers\App;
 
 use Curema\Models\App\Account;
-use Curema\Models\App\opportunity;
+use Curema\Models\App\Opportunity;
 use Curema\Models\User;
 use Illuminate\Http\Request;
 
@@ -70,7 +70,7 @@ class OpportunityController extends Controller
      */
     public function show($id)
     {
-        return view('app.opportunity.show', ['opportunity' => opportunity::find($id)]);
+        return view('app.opportunity.show', ['opportunity' => Opportunity::find($id)]);
     }
 
     /**
@@ -84,7 +84,7 @@ class OpportunityController extends Controller
         return view('app.opportunity.edit', [
             'users' => User::all(),
             'accounts' => Account::all(),
-            'opportunity' => opportunity::find($id)
+            'opportunity' => Opportunity::find($id)
         ]);
     }
 
