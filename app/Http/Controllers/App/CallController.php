@@ -3,7 +3,7 @@
 namespace Curema\Http\Controllers\App;
 
 use Curema\Models\App\Account;
-use Curema\Models\App\call;
+use Curema\Models\App\Call;
 use Curema\Models\App\Change;
 use Curema\Models\App\Contact;
 use Curema\Models\App\Lead;
