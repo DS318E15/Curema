@@ -1,5 +1,7 @@
 body > nav {
-  flex: 0 0 240px;
+  width: 240px;
+  height: 100%;
+  float: left;
   background-color: $ebony-clay;
 
   > h1 {

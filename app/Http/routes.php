@@ -18,6 +18,7 @@ Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
         'account' => 'App\AccountController',
         'contact' => 'App\ContactController',
         'ticket' => 'App\TicketController',
+        'call' => 'App\CallController',
     ];
 
     foreach ($resources as $route => $controller) {

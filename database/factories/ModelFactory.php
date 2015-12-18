@@ -96,7 +96,6 @@ $factory->define(Curema\Models\App\Opportunity::class, function (Faker\Generator
     ];
 });
 
-
 $factory->define(Curema\Models\App\Ticket::class, function (Faker\Generator $faker) {
     $faker = Faker\Factory::create('da_DK');
 
@@ -106,5 +105,17 @@ $factory->define(Curema\Models\App\Ticket::class, function (Faker\Generator $fak
         'user_id' => $faker->numberBetween(1, 30),
         'contact_id' => $faker->numberBetween(1, 10),
         'account_id' => $faker->numberBetween(1, 5),
+    ];
+});
+
+$factory->define(Curema\Models\App\Call::class, function (Faker\Generator $faker) {
+    $faker = Faker\Factory::create('da_DK');
+
+    return [
+        'lead_id' => $faker->numberBetween(1, 10),
+        'contact_id' => $faker->numberBetween(1, 10),
+        'account_id' => $faker->numberBetween(1, 5),
+        'user_id' => $faker->numberBetween(1, 27),
+        'content' => $faker->paragraph(),
     ];
 });

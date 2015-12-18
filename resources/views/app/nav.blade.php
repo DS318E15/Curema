@@ -27,4 +27,8 @@
         <a href="{{ route('app.ticket.index') }}"
            class="{{ Ekko::areActiveRoutes(['app.ticket.index', 'app.ticket.create', 'app.ticket.show', 'app.ticket.edit', 'app.ticket.trash']) }}">Cases</a>
     </li>
+    <li>
+        <a href="{{ route('app.call.index') }}"
+           class="{{ Ekko::areActiveRoutes(['app.call.index', 'app.call.create', 'app.call.show', 'app.call.edit', 'app.call.trash']) }}">Calls</a>
+    </li>
 </ul>
