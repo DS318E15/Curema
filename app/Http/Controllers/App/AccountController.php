@@ -107,6 +107,7 @@ class AccountController extends Controller
             'city' => 'required',
             'zip' => 'required',
             'country' => 'required',
+            'cvr' => 'numeric'
         ]);
 
         $account = Account::find($id);

@@ -16,14 +16,14 @@ class CreateChangesTable extends Migration
             $table->increments('id');
 
             $table->string('type');
-            $table->string('user_id')->nullable();
-            $table->string('account_id')->nullable();
-            $table->string('contact_id')->nullable();
-            $table->string('opportunity_id')->nullable();
-            $table->string('lead_id')->nullable();
-            $table->string('ticket_id')->nullable();
-            $table->string('call_id')->nullable();
-            $table->string('email_id')->nullable();
+            $table->integer('user_id')->nullable();
+            $table->integer('account_id')->nullable();
+            $table->integer('contact_id')->nullable();
+            $table->integer('opportunity_id')->nullable();
+            $table->integer('lead_id')->nullable();
+            $table->integer('ticket_id')->nullable();
+            $table->integer('call_id')->nullable();
+            $table->integer('email_id')->nullable();
 
             $table->timestamps();
         });

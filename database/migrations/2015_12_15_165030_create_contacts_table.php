@@ -24,8 +24,8 @@ class CreateContactsTable extends Migration
             $table->string('country')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
-            $table->string('user_id');
-            $table->string('account_id');
+            $table->integer('user_id');
+            $table->integer('account_id');
 
             $table->boolean('active')->default(1);
             $table->timestamps();

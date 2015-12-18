@@ -17,8 +17,8 @@ class CreateOpportunitiesTable extends Migration
             $table->string('name');
             $table->string('amount');
             $table->string('opportunity_stage_id')->default(1);;
-            $table->string('user_id');
-            $table->string('account_id');
+            $table->integer('user_id');
+            $table->integer('account_id');
             $table->boolean('active')->default(1);
             $table->dateTime('closing_at');
             $table->timestamps();

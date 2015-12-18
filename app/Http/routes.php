@@ -46,4 +46,3 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::get('/', function () {
     return view('home');
 });
-
