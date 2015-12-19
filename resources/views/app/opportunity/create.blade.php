@@ -20,7 +20,7 @@
                 <fieldset class="col-xs-12">
                     <label>
                         Name*
-                        <input type="text" name="name">
+                        <input type="text" name="name" value="{{ old('name') }}">
                         @if($errors->has('name'))
                             <small class="error">{{ $errors->first('name') }}</small>
                         @endif
@@ -32,7 +32,7 @@
                 <fieldset class="col-xs-12">
                     <label>
                         Amount
-                        <input type="text" name="amount">
+                        <input type="text" name="amount" value="{{ old('amount') }}">
                         @if($errors->has('amount'))
                             <small class="error">{{ $errors->first('amount') }}</small>
                         @endif
@@ -46,7 +46,11 @@
                         Account*
                         <select name="account_id">
                             @foreach($accounts as $account)
-                                <option value="{{ $account->id }}">{{ $account->name }}</option>
+                                @if($account->id == old('account_id'))
+                                    <option value="{{ $account->id }}" selected>{{ $account->name }}</option>
+                                @else
+                                    <option value="{{ $account->id }}">{{ $account->name }}</option>
+                                @endif
                             @endforeach
                         </select>
                         @if($errors->has('account_id'))
@@ -60,8 +64,11 @@
                         Owner*
                         <select name="user_id">
                             @foreach($users as $user)
-                                <option value="{{ $user->id }}"
-                                        @if($user->id == Auth::user()->id) selected @endif>{{ $user->name }}</option>
+                                @if($user->id == old('user_id', Auth::user()->id))
+                                    <option value="{{ $user->id }}" selected>{{ $user->name }}</option>
+                                @else
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endif
                             @endforeach
                         </select>
                         @if($errors->has('user_id'))

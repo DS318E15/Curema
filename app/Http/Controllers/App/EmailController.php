@@ -23,7 +23,7 @@ class EmailController extends Controller
      */
     public function index()
     {
-        return view('app.email.index', ['emails' => Email::all()]);
+        return view('app.email.index', ['emails' => Email::orderBy('updated_at', 'DESC')->get()]);
     }
 
     /**

@@ -20,7 +20,7 @@
                 <fieldset class="col-xs-8">
                     <label>
                         Name
-                        <input type="text" name="name">
+                        <input type="text" name="name" value="{{ old('name') }}">
                         @if($errors->has('name'))
                             <small class="error">{{ $errors->first('name') }}</small>
                         @endif
@@ -30,7 +30,7 @@
                 <fieldset class="col-xs-4">
                     <label>
                         CVR
-                        <input type="text" name="cvr">
+                        <input type="text" name="cvr" value="{{ old('cvr') }}">
                         @if($errors->has('cvr'))
                             <small class="error">{{ $errors->first('cvr') }}</small>
                         @endif
@@ -42,7 +42,7 @@
                 <fieldset class="col-xs-4">
                     <label>
                         Phone
-                        <input type="text" name="phone">
+                        <input type="text" name="phone" value="{{ old('phone') }}">
                         @if($errors->has('phone'))
                             <small class="error">{{ $errors->first('phone') }}</small>
                         @endif
@@ -52,7 +52,7 @@
                 <fieldset class="col-xs-8">
                     <label>
                         Email
-                        <input type="text" name="email">
+                        <input type="text" name="email" value="{{ old('email') }}">
                         @if($errors->has('email'))
                             <small class="error">{{ $errors->first('email') }}</small>
                         @endif
@@ -64,7 +64,7 @@
                 <fieldset class="col-xs-6">
                     <label>
                         Website
-                        <input type="text" name="website">
+                        <input type="text" name="website" value="{{ old('website') }}">
                         @if($errors->has('website'))
                             <small class="error">{{ $errors->first('website') }}</small>
                         @endif
@@ -76,8 +76,11 @@
                         Owner*
                         <select name="user_id">
                             @foreach($users as $user)
-                                <option value="{{ $user->id }}"
-                                        @if($user->id == Auth::user()->id) selected @endif>{{ $user->name }}</option>
+                                @if($user->id == old('user_id', Auth::user()->id))
+                                    <option value="{{ $user->id }}" selected>{{ $user->name }}</option>
+                                @else
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endif
                             @endforeach
                         </select>
                         @if($errors->has('user_id'))
@@ -93,7 +96,7 @@
                 <fieldset class="col-xs-9">
                     <label>
                         Street Name
-                        <input type="text" name="street_name">
+                        <input type="text" name="street_name" value="{{ old('street_name') }}">
                         @if($errors->has('street_name'))
                             <small class="error">{{ $errors->first('street_name') }}</small>
                         @endif
@@ -103,7 +106,7 @@
                 <fieldset class="col-xs-3">
                     <label>
                         Steet No.
-                        <input type="text" name="street_number">
+                        <input type="text" name="street_number" value="{{ old('street_number') }}">
                         @if($errors->has('street_number'))
                             <small class="error">{{ $errors->first('street_number') }}</small>
                         @endif
@@ -115,7 +118,7 @@
                 <fieldset class="col-xs-2">
                     <label>
                         Zip
-                        <input type="text" name="zip">
+                        <input type="text" name="zip" value="{{ old('zip') }}">
                         @if($errors->has('zip'))
                             <small class="error">{{ $errors->first('zip') }}</small>
                         @endif
@@ -125,7 +128,7 @@
                 <fieldset class="col-xs-10">
                     <label>
                         City
-                        <input type="text" name="city">
+                        <input type="text" name="city" value="{{ old('city') }}">
                         @if($errors->has('city'))
                             <small class="error">{{ $errors->first('city') }}</small>
                         @endif
@@ -137,7 +140,7 @@
                 <fieldset class="col-xs-12">
                     <label>
                         Country
-                        <input type="text" name="country">
+                        <input type="text" name="country" value="{{ old('country') }}">
                         @if($errors->has('country'))
                             <small class="error">{{ $errors->first('country') }}</small>
                         @endif

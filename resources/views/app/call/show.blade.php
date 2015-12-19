@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="input">
-                    Call From
+                    Content
                     <div>{{ $call->content }}</div>
                 </div>
             </div>

@@ -2,12 +2,14 @@
 
 namespace Curema\Http\Controllers\App;
 
+use Curema\Models\App\Change;
 use Curema\Models\App\Lead;
 use Curema\Models\User;
 use Illuminate\Http\Request;
 
 use Curema\Http\Requests;
 use Curema\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class LeadController extends Controller
 {
@@ -18,7 +20,7 @@ class LeadController extends Controller
      */
     public function index()
     {
-        return view('app.lead.index', ['leads' => Lead::where('active', 1)->get()]);
+        return view('app.lead.index', ['leads' => Lead::where('active', 1)->orderBy('updated_at', 'DESC')->get()]);
     }
 
     /**

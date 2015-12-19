@@ -15,7 +15,7 @@ class Account extends Model
 
     public function changes()
     {
-        return $this->hasMany('Curema\Models\App\Change');
+        return $this->hasMany('Curema\Models\App\Change')->orderBy('updated_at', 'DESC');;
     }
 
 }

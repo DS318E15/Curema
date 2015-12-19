@@ -23,7 +23,7 @@ class CallController extends Controller
      */
     public function index()
     {
-        return view('app.call.index', ['calls' => Call::all()]);
+        return view('app.call.index', ['calls' => Call::orderBy('updated_at', 'DESC')->get()]);
     }
 
     /**

@@ -22,7 +22,7 @@ class TicketController extends Controller
      */
     public function index()
     {
-        return view('app.ticket.index', ['tickets' => Ticket::where('active', 1)->get()]);
+        return view('app.ticket.index', ['tickets' => Ticket::where('active', 1)->orderBy('updated_at', 'DESC')->get()]);
     }
 
     /**

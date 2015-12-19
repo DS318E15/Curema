@@ -21,7 +21,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('app.contact.index', ['contacts' => Contact::where('active', 1)->get()]);
+        return view('app.contact.index', ['contacts' => Contact::where('active', 1)->orderBy('updated_at', 'DESC')->get()]);
     }
 
     /**

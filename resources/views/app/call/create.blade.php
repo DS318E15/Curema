@@ -23,7 +23,11 @@
                         <select name="lead_id">
                             <option value=""></option>
                             @foreach($leads as $lead)
-                                <option value="{{ $lead->id }}">{{ $lead->name }}</option>
+                                @if($lead->id == old('lead_id'))
+                                    <option value="{{ $lead->id }}" selected>{{ $lead->name }}</option>
+                                @else
+                                    <option value="{{ $lead->id }}">{{ $lead->name }}</option>
+                                @endif
                             @endforeach
                         </select>
                         @if($errors->has('lead_id'))
@@ -40,7 +44,11 @@
                         <select name="contact_id">
                             <option value=""></option>
                             @foreach($contacts as $contact)
-                                <option value="{{ $contact->id }}">{{ $contact->name }}</option>
+                                @if($contact->id == old('contact_id'))
+                                    <option value="{{ $contact->id }}" selected>{{ $contact->name }}</option>
+                                @else
+                                    <option value="{{ $contact->id }}">{{ $contact->name }}</option>
+                                @endif
                             @endforeach
                         </select>
                         @if($errors->has('contact_id'))
@@ -57,7 +65,11 @@
                         <select name="account_id">
                             <option value=""></option>
                             @foreach($accounts as $account)
-                                <option value="{{ $account->id }}">{{ $account->name }}</option>
+                                @if($account->id == old('account_id'))
+                                    <option value="{{ $account->id }}" selected>{{ $account->name }}</option>
+                                @else
+                                    <option value="{{ $account->id }}">{{ $account->name }}</option>
+                                @endif
                             @endforeach
                         </select>
                         @if($errors->has('account_id'))
@@ -73,7 +85,7 @@
                 <fieldset class="col-xs-12">
                     <label>
                         Content*
-                        <textarea name="content"></textarea>
+                        <textarea name="content">{{ old('content') }}</textarea>
                         @if($errors->has('content'))
                             <small class="error">{{ $errors->first('content') }}</small>
                         @endif
@@ -87,8 +99,11 @@
                         Call From*
                         <select name="user_id">
                             @foreach($users as $user)
-                                <option value="{{ $user->id }}"
-                                        @if($user->id == Auth::user()->id) selected @endif>{{ $user->name }}</option>
+                                @if($user->id == old('user_id', Auth::user()->id))
+                                    <option value="{{ $user->id }}" selected>{{ $user->name }}</option>
+                                @else
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endif
                             @endforeach
                         </select>
                         @if($errors->has('user_id'))

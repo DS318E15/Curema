@@ -18,7 +18,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return view('app.employee.index', ['employees' => User::where('active', 1)->get()]);
+        return view('app.employee.index', ['employees' => User::where('active', 1)->orderBy('updated_at', 'DESC')->get()]);
     }
 
     /**

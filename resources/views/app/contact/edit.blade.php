@@ -26,7 +26,7 @@
                 <fieldset class="col-xs-8">
                     <label>
                         Name*
-                        <input type="text" name="name" value="{{ $contact->name }}">
+                        <input type="text" name="name" value="{{ old('name', $contact->name) }}">
                         @if($errors->has('name'))
                             <small class="error">{{ $errors->first('name') }}</small>
                         @endif
@@ -36,7 +36,7 @@
                 <fieldset class="col-xs-4">
                     <label>
                         Title
-                        <input type="text" name="title" value="{{ $contact->title }}">
+                        <input type="text" name="title" value="{{ old('title', $contact->title) }}">
                         @if($errors->has('title'))
                             <small class="error">{{ $errors->first('title') }}</small>
                         @endif
@@ -48,7 +48,7 @@
                 <fieldset class="col-xs-4">
                     <label>
                         Phone
-                        <input type="text" name="phone" value="{{ $contact->phone }}">
+                        <input type="text" name="phone" value="{{ old('phone', $contact->phone) }}">
                         @if($errors->has('phone'))
                             <small class="error">{{ $errors->first('phone') }}</small>
                         @endif
@@ -58,7 +58,7 @@
                 <fieldset class="col-xs-8">
                     <label>
                         Email
-                        <input type="text" name="email" value="{{ $contact->email }}">
+                        <input type="text" name="email" value="{{ old('email', $contact->email) }}">
                         @if($errors->has('email'))
                             <small class="error">{{ $errors->first('email') }}</small>
                         @endif
@@ -72,8 +72,11 @@
                         Account*
                         <select name="account_id">
                             @foreach($accounts as $account)
-                                <option value="{{ $account->id }}"
-                                        @if($account->id == $contact->account_id) selected @endif>{{ $account->name }}</option>
+                                @if($account->id == old('account_id', $account->id))
+                                    <option value="{{ $account->id }}" selected>{{ $account->name }}</option>
+                                @else
+                                    <option value="{{ $account->id }}">{{ $account->name }}</option>
+                                @endif
                             @endforeach
                         </select>
                         @if($errors->has('account_id'))
@@ -87,8 +90,11 @@
                         Owner*
                         <select name="user_id">
                             @foreach($users as $user)
-                                <option value="{{ $user->id }}"
-                                        @if($user->id == $contact->user_id) selected @endif>{{ $user->name }}</option>
+                                @if($user->id == old('user_id', Auth::user()->id))
+                                    <option value="{{ $user->id }}" selected>{{ $user->name }}</option>
+                                @else
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endif
                             @endforeach
                         </select>
                         @if($errors->has('user_id'))
@@ -104,7 +110,7 @@
                 <fieldset class="col-xs-9">
                     <label>
                         Street Name
-                        <input type="text" name="street_name" value="{{ $contact->street_name }}">
+                        <input type="text" name="street_name" value="{{ old('street_name', $contact->street_name) }}">
                         @if($errors->has('street_name'))
                             <small class="error">{{ $errors->first('street_name') }}</small>
                         @endif
@@ -114,7 +120,7 @@
                 <fieldset class="col-xs-3">
                     <label>
                         Steet No.
-                        <input type="text" name="street_number" value="{{ $contact->street_number }}">
+                        <input type="text" name="street_number" value="{{ old('street_number', $contact->street_number) }}">
                         @if($errors->has('street_number'))
                             <small class="error">{{ $errors->first('street_number') }}</small>
                         @endif
@@ -126,7 +132,7 @@
                 <fieldset class="col-xs-2">
                     <label>
                         Zip
-                        <input type="text" name="zip" value="{{ $contact->zip }}">
+                        <input type="text" name="zip" value="{{ old('zip', $contact->zip) }}">
                         @if($errors->has('zip'))
                             <small class="error">{{ $errors->first('zip') }}</small>
                         @endif
@@ -136,7 +142,7 @@
                 <fieldset class="col-xs-10">
                     <label>
                         City
-                        <input type="text" name="city" value="{{ $contact->city }}">
+                        <input type="text" name="city" value="{{ old('city', $contact->city) }}">
                         @if($errors->has('city'))
                             <small class="error">{{ $errors->first('city') }}</small>
                         @endif
@@ -148,7 +154,7 @@
                 <fieldset class="col-xs-12">
                     <label>
                         Country
-                        <input type="text" name="country" value="{{ $contact->country }}">
+                        <input type="text" name="country" value="{{ old('country', $contact->country) }}">
                         @if($errors->has('country'))
                             <small class="error">{{ $errors->first('country') }}</small>
                         @endif

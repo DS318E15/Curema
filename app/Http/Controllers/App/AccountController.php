@@ -20,7 +20,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $account = Account::where('active', 1)->get();
+        $account = Account::where('active', 1)->orderBy('updated_at', 'DESC')->get();
 
         return view('app.account.index', [
             'accounts' => $account
@@ -49,11 +49,13 @@ class AccountController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'user_id' => 'required',
             'street_name' => 'required',
             'street_number' => 'required',
             'city' => 'required',
             'zip' => 'required',
             'country' => 'required',
+            'cvr' => 'numeric',
         ]);
 
         $account = new Account($request->all());
