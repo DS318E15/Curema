@@ -2,6 +2,27 @@
 
 @section('content')
 
-DASHBOARD
+    @if(Session::has('alert-success'))
+        <div class="alert success">
+            {{ Session::get('alert-success') }}
+        </div>
+    @endif
+
+    <div class="row">
+        <section class="col-xs-8">
+            <div class="panel">
+
+            </div>
+        </section>
+
+        <section class="col-xs-4">
+            <div class="panel activities">
+                <header>
+                    <h1>Activities</h1>
+                </header>
+                @include('app.dashboard.activity')
+            </div>
+        </section>
+    </div>
 
 @endsection
