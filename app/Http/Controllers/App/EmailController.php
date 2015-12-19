@@ -78,7 +78,12 @@ class EmailController extends Controller
      */
     public function show($id)
     {
-        return view('app.email.show', ['email' => Email::find($id)]);
+        $email = Email::find($id);
+
+        return view('app.email.show', [
+            'email' => $email,
+            'changes' => $email->changes->take(5)
+        ]);
     }
 
     /**
@@ -127,5 +132,21 @@ class EmailController extends Controller
 
         $request->session()->flash('alert-success', 'Email was successfully updated!');
         return redirect()->back();
+    }
+
+    /**
+     * Display a listing of all activites on this ressource.
+     *
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
+    public function activities($id)
+    {
+        $email = Email::find($id);
+
+        return view('app.email.activities', [
+            'email' => $email,
+            'changes' => $email->changes
+        ]);
     }
 }

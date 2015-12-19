@@ -8,24 +8,9 @@ class Change extends Model
 {
     protected $guarded = [];
 
-    public function user()
+    public function account()
     {
-        return $this->belongsTo('Curema\Models\User');
-    }
-
-    public function opportunity()
-    {
-        return $this->belongsTo('Curema\Models\App\Opportunity');
-    }
-
-    public function contact()
-    {
-        return $this->belongsTo('Curema\Models\App\Contact');
-    }
-
-    public function ticket()
-    {
-        return $this->belongsTo('Curema\Models\App\Ticket');
+        return $this->belongsTo('Curema\Models\App\Account');
     }
 
     public function call()
@@ -33,8 +18,33 @@ class Change extends Model
         return $this->belongsTo('Curema\Models\App\Call');
     }
 
+    public function contact()
+    {
+        return $this->belongsTo('Curema\Models\App\Contact');
+    }
+
     public function email()
     {
         return $this->belongsTo('Curema\Models\App\Email');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('Curema\Models\User');
+    }
+
+    public function lead()
+    {
+        return $this->belongsTo('Curema\Models\App\Lead');
+    }
+
+    public function opportunity()
+    {
+        return $this->belongsTo('Curema\Models\App\Opportunity');
+    }
+
+    public function ticket()
+    {
+        return $this->belongsTo('Curema\Models\App\Ticket');
     }
 }

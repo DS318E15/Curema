@@ -67,7 +67,12 @@ class LeadController extends Controller
      */
     public function show($id)
     {
-        return view('app.lead.show', ['lead' => Lead::find($id)]);
+        $lead = Lead::find($id);
+
+        return view('app.lead.show', [
+            'lead' => $lead,
+            'changes' => $lead->changes->take(5)
+        ]);
     }
 
     /**
@@ -166,5 +171,21 @@ class LeadController extends Controller
     public function trash()
     {
         return view('app.lead.trash', ['leads' => Lead::where('active', 0)->get()]);
+    }
+
+    /**
+     * Display a listing of all activites on this ressource.
+     *
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
+    public function activities($id)
+    {
+        $lead = Lead::find($id);
+
+        return view('app.lead.activities', [
+            'lead' => $lead,
+            'changes' => $lead->changes
+        ]);
     }
 }

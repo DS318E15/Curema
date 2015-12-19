@@ -72,6 +72,7 @@
             <div class="panel activities">
                 <header>
                     <h1>Activities</h1>
+                    <a href="{{ route('app.ticket.activities', $ticket->id) }}" class="button">Show all</a>
                 </header>
                 @include('app.ticket.activity')
             </div>

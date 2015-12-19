@@ -32,6 +32,6 @@ class User extends Model implements AuthenticatableContract,
 
     public function changes()
     {
-        return $this->hasMany('Curema\Models\App\Change')->orderBy('updated_at', 'DESC')->take(5);
+        return $this->hasMany('Curema\Models\App\Change')->orderBy('updated_at', 'DESC');
     }
 }

@@ -76,7 +76,12 @@ class TicketController extends Controller
      */
     public function show($id)
     {
-        return view('app.ticket.show', ['ticket' => Ticket::find($id)]);
+        $ticket = Ticket::find($id);
+
+        return view('app.ticket.show', [
+            'ticket' => $ticket,
+            'changes' => $ticket->changes->take(5)
+        ]);
     }
 
     /**
@@ -184,5 +189,21 @@ class TicketController extends Controller
     public function trash()
     {
         return view('app.ticket.trash', ['tickets' => Ticket::where('active', 0)->get()]);
+    }
+
+    /**
+     * Display a listing of all activites on this ressource.
+     *
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
+    public function activities($id)
+    {
+        $ticket = Ticket::find($id);
+
+        return view('app.ticket.activities', [
+            'ticket' => $ticket,
+            'changes' => $ticket->changes
+        ]);
     }
 }

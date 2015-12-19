@@ -97,8 +97,7 @@ class AccountController extends Controller
 
         return view('app.account.edit', [
             'users' => User::all(),
-            'account' => $account,
-            'changes' => $account->changes->take(5)
+            'account' => $account
         ]);
     }
 

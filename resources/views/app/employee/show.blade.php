@@ -12,7 +12,7 @@
         <section class="col-xs-8">
             <div class="panel">
                 <header>
-                    <a href="{{ URL::previous() }}" class="button">Back</a>
+                    <a href="{{ route('app.employee.index') }}" class="button">Back</a>
                 </header>
 
                 <div class="input">
@@ -50,24 +50,9 @@
             <div class="panel activities">
                 <header>
                     <h1>Activities</h1>
+                    <a href="{{ route('app.employee.activities', $employee->id) }}" class="button">Show all</a>
                 </header>
-                @foreach($employee->changes as $change)
-                    <div class="activity">
-                        <p>
-                            <a href="{{ route('app.employee.show', $change->user_id) }}">{{ $change->user->name }}</a>
-                            @if($change->type == "create")
-                                created this employee.
-                            @elseif($change->type == "update")
-                                updated this employee.
-                            @elseif($change->type == "destroy")
-                                destroyed this employee.
-                            @elseif($change->type == "restore")
-                                restored this employee.
-                            @endif
-                        </p>
-                        <small>{{ $change->created_at }}</small>
-                    </div>
-                @endforeach
+              @include('app.employee.activity')
             </div>
         </section>
     </div>

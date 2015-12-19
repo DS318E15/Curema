@@ -1,4 +1,4 @@
-@foreach($opportunity->changes as $change)
+@foreach($changes as $change)
     <div class="activity">
         <div>
             <a href="{{ route('app.employee.show', $change->user_id) }}">{{ $change->user->name }}</a>

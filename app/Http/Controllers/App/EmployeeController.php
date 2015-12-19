@@ -29,8 +29,27 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
+        $user = User::find($id);
+
         return view('app.employee.show', [
-            'employee' => User::find($id)
+            'employee' => $user,
+            'changes' => $user->changes->take(5)
+        ]);
+    }
+
+    /**
+     * Display a listing of all activites on this ressource.
+     *
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
+    public function activities($id)
+    {
+        $user = User::find($id);
+
+        return view('app.employee.activities', [
+            'employee' => $user,
+            'changes' => $user->changes
         ]);
     }
 }

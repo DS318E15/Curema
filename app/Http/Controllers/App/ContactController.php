@@ -73,7 +73,12 @@ class ContactController extends Controller
      */
     public function show($id)
     {
-        return view('app.contact.show', ['contact' => Contact::find($id)]);
+        $contact = Contact::find($id);
+
+        return view('app.contact.show', [
+            'contact' => $contact,
+            'changes' => $contact->changes->take(5)
+        ]);
     }
 
     /**
@@ -177,5 +182,21 @@ class ContactController extends Controller
     public function trash()
     {
         return view('app.contact.trash', ['contacts' => Contact::where('active', 0)->get()]);
+    }
+
+    /**
+     * Display a listing of all activites on this ressource.
+     *
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
+    public function activities($id)
+    {
+        $contact = Contact::find($id);
+
+        return view('app.contact.activities', [
+            'contact' => $contact,
+            'changes' => $contact->changes
+        ]);
     }
 }

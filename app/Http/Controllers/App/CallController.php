@@ -78,7 +78,12 @@ class CallController extends Controller
      */
     public function show($id)
     {
-        return view('app.call.show', ['call' => Call::find($id)]);
+        $call = Call::find($id);
+
+        return view('app.call.show', [
+            'call' => $call,
+            'changes' => $call->changes->take(5)
+        ]);
     }
 
     /**
@@ -127,5 +132,21 @@ class CallController extends Controller
 
         $request->session()->flash('alert-success', 'Call was successfully updated!');
         return redirect()->back();
+    }
+
+    /**
+     * Display a listing of all activites on this ressource.
+     *
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
+    public function activities($id)
+    {
+        $call = Call::find($id);
+
+        return view('app.call.activities', [
+            'call' => $call,
+            'changes' => $call->changes
+        ]);
     }
 }

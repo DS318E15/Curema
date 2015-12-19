@@ -73,8 +73,11 @@ class OpportunityController extends Controller
      */
     public function show($id)
     {
+        $opportunity = Opportunity::find($id);
+
         return view('app.opportunity.show', [
-            'opportunity' => Opportunity::find($id),
+            'opportunity' => $opportunity,
+            'changes' => $opportunity->changes->take(5)
         ]);
     }
 
@@ -179,5 +182,21 @@ class OpportunityController extends Controller
     public function trash()
     {
         return view('app.opportunity.trash', ['opportunities' => Opportunity::where('active', 0)->get()]);
+    }
+
+    /**
+     * Display a listing of all activites on this ressource.
+     *
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
+    public function activities($id)
+    {
+        $opportunity = Opportunity::find($id);
+
+        return view('app.opportunity.activities', [
+            'opportunity' => $opportunity,
+            'changes' => $opportunity->changes
+        ]);
     }
 }

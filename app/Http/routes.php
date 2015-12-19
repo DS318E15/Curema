@@ -29,11 +29,13 @@ Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
     }
 
     Route::resource('call', 'App\CallController');
-    Route::resource('email', 'App\EmailController');
+    Route::get('call/{id}/activities', ['uses' => 'App\CallController@activities', 'as' => 'app.call.activities']);
 
-    Route::resource('employee', 'App\EmployeeController', [
-        'only' => ['index', 'show']
-    ]);
+    Route::resource('email', 'App\EmailController');
+    Route::get('email/{id}/activities', ['uses' => 'App\EmailController@activities', 'as' => 'app.email.activities']);
+
+    Route::resource('employee', 'App\EmployeeController', ['only' => ['index', 'show']]);
+    Route::get('employee/{id}/activities', ['uses' => 'App\EmployeeController@activities', 'as' => 'app.employee.activities']);
 
     Route::controller('/', 'App\DashboardController', [
         'getIndex' => 'app.dashboard.index'
