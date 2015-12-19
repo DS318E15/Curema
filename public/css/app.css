@@ -1242,8 +1242,7 @@ main {
       main .panel.activities .activity p {
         margin: 0; }
       main .panel.activities .activity:first-of-type {
-        padding-top: 0;
-        margin-top: -15px; }
+        padding-top: 0; }
       main .panel.activities .activity:last-of-type {
         border: 0;
         padding-bottom: 0; }

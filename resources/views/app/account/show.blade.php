@@ -72,6 +72,8 @@
             <div class="panel activities">
                 <header>
                     <h1>Activities</h1>
+
+                    <a href="{{ route('app.account.activities', $account->id) }}" class="button">Show all</a>
                 </header>
 
                 @include('app.account.activity')

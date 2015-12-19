@@ -23,6 +23,7 @@ Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
     foreach ($resources as $route => $controller) {
         Route::post($route . '/{' . $route . '}/destroy', ['uses' => $controller . '@destroy', 'as' => 'app.' . $route . '.destroy']);
         Route::post($route . '/{' . $route . '}/restore', ['uses' => $controller . '@restore', 'as' => 'app.' . $route . '.restore']);
+        Route::get($route . '/{id}/activities', ['uses' => $controller . '@activities', 'as' => 'app.' . $route . '.activities']);
         Route::get($route . '/trash', ['uses' => $controller . '@trash', 'as' => 'app.' . $route . '.trash']);
         Route::resource($route, $controller, ['except' => 'destroy']);
     }

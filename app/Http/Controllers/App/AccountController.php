@@ -2,9 +2,9 @@
 
 namespace Curema\Http\Controllers\App;
 
+use Curema\Models\User;
 use Curema\Models\App\Account;
 use Curema\Models\App\Change;
-use Curema\Models\User;
 use Illuminate\Http\Request;
 
 use Curema\Http\Requests;
@@ -20,7 +20,11 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return view('app.account.index', ['accounts' => Account::where('active', 1)->get()]);
+        $account = Account::where('active', 1)->get();
+
+        return view('app.account.index', [
+            'accounts' => $account
+        ]);
     }
 
     /**
@@ -73,8 +77,11 @@ class AccountController extends Controller
      */
     public function show($id)
     {
+        $account = Account::find($id);
+
         return view('app.account.show', [
-            'account' => Account::find($id)
+            'account' => $account,
+            'changes' => $account->changes->take(5)
         ]);
     }
 
@@ -86,9 +93,12 @@ class AccountController extends Controller
      */
     public function edit($id)
     {
+        $account = Account::find($id);
+
         return view('app.account.edit', [
             'users' => User::all(),
-            'account' => Account::find($id)
+            'account' => $account,
+            'changes' => $account->changes->take(5)
         ]);
     }
 
@@ -180,5 +190,22 @@ class AccountController extends Controller
     public function trash()
     {
         return view('app.account.trash', ['accounts' => Account::where('active', 0)->get()]);
+    }
+
+
+    /**
+     * Display a listing of all activites on this ressource.
+     *
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
+    public function activities($id)
+    {
+        $account = Account::find($id);
+
+        return view('app.account.activities', [
+            'account' => $account,
+            'changes' => $account->changes
+        ]);
     }
 }

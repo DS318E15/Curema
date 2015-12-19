@@ -12,7 +12,7 @@
         <section class="col-xs-8">
             <div class="panel">
                 <header>
-                    <a href="{{ route('app.employee.index') }}" class="button">Back</a>
+                    <a href="{{ URL::previous() }}" class="button">Back</a>
                 </header>
 
                 <div class="input">

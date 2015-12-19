@@ -10,7 +10,7 @@ class Lead extends Model
 
     public function changes()
     {
-        return $this->hasMany('Curema\Models\App\Change')->orderBy('updated_at', 'DESC')->take(10);
+        return $this->hasMany('Curema\Models\App\Change')->orderBy('updated_at', 'DESC');
     }
 
     public function user()
