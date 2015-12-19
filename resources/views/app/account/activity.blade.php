@@ -29,6 +29,7 @@
                 this account.
             @endif
         </div>
+
         <small>{{ $change->created_at }}</small>
     </div>
 @endforeach
