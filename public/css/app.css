@@ -1043,7 +1043,7 @@ button, .button {
 
 table {
   width: calc(100% + 30px);
-  margin: -30px -15px; }
+  margin: -15px -15px; }
   table tr th {
     height: 50px;
     padding: 0 15px;
