@@ -12,7 +12,6 @@
 */
 
 Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
-
      // Employee
     Route::get('employee/trash', 'App\EmployeeController@trash')->name('app.employee.trash');
     Route::get('employee/{id}/activities', 'App\EmployeeController@activities')->name('app.employee.activities');
@@ -34,12 +33,15 @@ Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
     // Lead
     Route::get('lead/trash', 'App\LeadController@trash')->name('app.lead.trash');
     Route::get('lead/{id}/activities', 'App\LeadController@activities')->name('app.lead.activities');
+    Route::get('lead/{id}/conversion', 'App\LeadController@conversion')->name('app.lead.conversion');
     Route::put('lead/{id}/restore', 'App\LeadController@restore')->name('app.lead.restore');
+    Route::post('lead/{id}/convert', 'App\LeadController@convert')->name('app.lead.convert');
     Route::resource('lead', 'App\LeadController');
 
     // Opportunity
     Route::get('opportunity/trash', 'App\OpportunityController@trash')->name('app.opportunity.trash');
     Route::get('opportunity/{id}/activities', 'App\OpportunityController@activities')->name('app.opportunity.activities');
+    Route::put('opportunity/{id}/stage', 'App\OpportunityController@stage')->name('app.opportunity.stage');
     Route::put('opportunity/{id}/restore', 'App\OpportunityController@restore')->name('app.opportunity.restore');
     Route::resource('opportunity', 'App\OpportunityController');
 
@@ -57,16 +59,8 @@ Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
     Route::get('email/{id}/activities', 'App\EmailController@activities')->name('app.email.activities');
     Route::resource('email', 'App\EmailController', ['exclude' => 'destroy']);
 
-
-
-
-    Route::get('lead/{id}/conversion', ['uses' => 'App\LeadController@conversion', 'as' => 'app.lead.conversion']);
-    Route::post('lead/{id}/convert', ['uses' => 'App\LeadController@convert', 'as' => 'app.lead.convert']);
-    Route::put('opportunity/{id}/stage', ['uses' => 'App\OpportunityController@stage', 'as' => 'app.opportunity.stage']);
-
-    Route::controller('/', 'App\DashboardController', [
-        'getIndex' => 'app.dashboard.index'
-    ]);
+    // Dashboard
+    Route::get('/', 'App\DashboardController@index')->name('app.dashboard.index');
 });
 
 Route::get('auth/login', 'Auth\AuthController@getLogin');

@@ -10,26 +10,35 @@ class Call extends Model
 
     public function changes()
     {
-        return $this->hasMany('Curema\Models\App\Change')->orderBy('updated_at', 'DESC');
+        return $this->hasMany('Curema\Models\App\Change')
+            ->orderBy('updated_at', 'DESC');
     }
 
     public function user()
     {
-        return $this->belongsTo('Curema\Models\User')->orderBy('updated_at', 'DESC');
+        return $this->belongsTo('Curema\Models\User')
+            ->withTrashed()
+            ->orderBy('updated_at', 'DESC');
     }
 
     public function account()
     {
-        return $this->belongsTo('Curema\Models\App\Account')->orderBy('updated_at', 'DESC');
+        return $this->belongsTo('Curema\Models\App\Account')
+            ->withTrashed()
+            ->orderBy('updated_at', 'DESC');
     }
 
     public function lead()
     {
-        return $this->belongsTo('Curema\Models\App\Lead')->orderBy('updated_at', 'DESC');
+        return $this->belongsTo('Curema\Models\App\Lead')
+            ->withTrashed()
+            ->orderBy('updated_at', 'DESC');
     }
 
     public function contact()
     {
-        return $this->belongsTo('Curema\Models\App\Contact')->orderBy('updated_at', 'DESC');
+        return $this->belongsTo('Curema\Models\App\Contact')
+            ->withTrashed()
+            ->orderBy('updated_at', 'DESC');
     }
 }

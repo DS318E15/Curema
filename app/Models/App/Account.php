@@ -14,12 +14,14 @@ class Account extends Model
     public function user()
     {
         return $this->belongsTo('Curema\Models\User')
+            ->withTrashed()
             ->orderBy('updated_at', 'DESC');
     }
 
     public function changes()
     {
         return $this->hasMany('Curema\Models\App\Change')
+            ->withTrashed()
             ->orderBy('updated_at', 'DESC');
     }
 }

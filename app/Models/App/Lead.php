@@ -13,11 +13,14 @@ class Lead extends Model
 
     public function changes()
     {
-        return $this->hasMany('Curema\Models\App\Change')->orderBy('updated_at', 'DESC');
+        return $this->hasMany('Curema\Models\App\Change')
+            ->orderBy('updated_at', 'DESC');
     }
 
     public function user()
     {
-        return $this->belongsTo('Curema\Models\User')->orderBy('updated_at', 'DESC');
+        return $this->belongsTo('Curema\Models\User')
+            ->withTrashed()
+            ->orderBy('updated_at', 'DESC');
     }
 }

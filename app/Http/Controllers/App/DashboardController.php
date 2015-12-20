@@ -9,7 +9,7 @@ use Curema\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
-    public function getIndex() {
+    public function index() {
         return view('app.dashboard.index');
     }
 }

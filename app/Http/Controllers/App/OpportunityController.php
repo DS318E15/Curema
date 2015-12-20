@@ -114,7 +114,7 @@ class OpportunityController extends Controller
         $request->session()
             ->flash('alert-success', 'Opportunity was successfully destroyed!');
 
-        return redirect()->route('app . opportunity . index');
+        return redirect()->route('app.opportunity.index');
     }
 
     public function restore(Request $request, $id)
@@ -138,7 +138,7 @@ class OpportunityController extends Controller
 
     public function trash()
     {
-        return view('app . opportunity . trash', [
+        return view('app.opportunity.trash', [
             'opportunities' => Opportunity::onlyTrashed()
                 ->orderBy('updated_at', 'DESC')->get()
         ]);
@@ -146,7 +146,7 @@ class OpportunityController extends Controller
 
     public function activities($id)
     {
-        return view('app . opportunity . activities', [
+        return view('app.opportunity.activities', [
             'opportunity' => Opportunity::find($id)
         ]);
     }

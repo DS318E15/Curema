@@ -25,7 +25,6 @@
                 <th>Account Name</th>
                 <th>Amount</th>
                 <th>Stage</th>
-                <th>Closing At</th>
                 <th>Owner</th>
             </tr>
             </thead>
@@ -36,7 +35,6 @@
                     <td><a href="{{ route('app.account.show', $opportunity->account->id) }}">{{ $opportunity->account->name }}</a></td>
                     <td>{{ $opportunity->amount }}</td>
                     <td>{{ $opportunity->opportunityStage->name }}</td>
-                    <td>{{ $opportunity->closing_at }}</td>
                     <td><a href="{{ route('app.employee.show', $opportunity->user->id) }}">{{ $opportunity->user->name }}</a></td>
                 </tr>
             @endforeach
