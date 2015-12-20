@@ -15,19 +15,19 @@ class CreateAccountsTable extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('user_id');
             $table->string('name');
-            $table->string('street_name');
-            $table->string('street_number');
-            $table->string('city');
-            $table->string('zip');
-            $table->string('country');
+            $table->string('street_name')->nullable();
+            $table->string('street_number')->nullable();
+            $table->string('city')->nullable();
+            $table->string('zip')->nullable();
+            $table->string('country')->nullable();
             $table->integer('cvr')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('website')->nullable();
+            $table->integer('user_id');
 
-            $table->boolean('active')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

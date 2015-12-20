@@ -14,16 +14,21 @@
                 <header>
                     <a href="{{ route('app.lead.index') }}" class="button">Back</a>
 
-                    @if(!$lead->active)
+                    @if($lead->trashed())
                         <form method="POST" action="{{ route('app.lead.restore', $lead->id) }}">
+                            {{ method_field('PUT') }}
                             {{ csrf_field() }}
+
                             <div class="button-group">
                                 <button type="submit">Restore</button>
                                 <a href="{{ route('app.lead.edit', $lead->id) }}" class="button">Edit</a>
                             </div>
                         </form>
                     @else
-                        <a href="{{ route('app.lead.edit', $lead->id) }}" class="button">Edit</a>
+                        <div class="button-group">
+                            <a href="{{ route('app.lead.conversion', $lead->id) }}" class="button">Convert</a>
+                            <a href="{{ route('app.lead.edit', $lead->id) }}" class="button">Edit</a>
+                        </div>
                     @endif
                 </header>
 
@@ -35,6 +40,11 @@
                 <div class="input">
                     Title:
                     <div>{{ $lead->title }}</div>
+                </div>
+
+                <div class="input">
+                    Company:
+                    <div>{{ $lead->company }}</div>
                 </div>
 
                 <div class="input">
@@ -69,7 +79,7 @@
                     <h1>Activities</h1>
                     <a href="{{ route('app.lead.activities', $lead->id) }}" class="button">Show all</a>
                 </header>
-                @include('app.lead.activity')
+
             </div>
         </section>
     </div>

@@ -11,18 +11,26 @@
     <div class="panel">
         <header>
             <a href="{{ route('app.opportunity.show', $opportunity->id) }}" class="button">Back</a>
-            <form method="POST"
-                  action="{{ route($opportunity->active ? 'app.opportunity.destroy' : 'app.opportunity.restore', $opportunity->id) }}">
-                {{ csrf_field() }}
-                <button type="submit">{{ $opportunity->active ? 'Destroy' : 'Restore' }}</button>
-            </form>
+            @if($opportunity->trashed())
+                <form method="POST" action="{{ route('app.opportunity.restore', $opportunity->id) }}">
+                    {{ method_field('PUT') }}
+                    {{ csrf_field() }}
+
+                    <button type="submit">Restore</button>
+                </form>
+            @else
+                <form method="post" action="{{ route('app.opportunity.destroy', $opportunity->id) }}">
+                    {{ method_field('DELETE') }}
+                    {{ csrf_field() }}
+
+                    <button type="submit">Delete</button>
+                </form>
+            @endif
         </header>
 
         <form method="POST" action="{{ route('app.opportunity.update', $opportunity->id) }}">
             {{ method_field('PUT') }}
             {{ csrf_field() }}
-
-                    <!-- TODO add stage selection -->
 
             <div class="row">
                 <fieldset class="col-xs-12">

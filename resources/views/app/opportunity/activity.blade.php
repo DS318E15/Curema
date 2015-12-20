@@ -11,6 +11,8 @@
                 destroyed
             @elseif($change->type == "restore")
                 restored
+            @elseif($change->type == "stage")
+                changed the stage of
             @else
                 changed
             @endif

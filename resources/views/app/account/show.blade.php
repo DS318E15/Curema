@@ -14,9 +14,11 @@
                 <header>
                     <a href="{{ route('app.account.index') }}" class="button">Back</a>
 
-                    @if(!$account->active)
+                    @if($account->trashed())
                         <form method="POST" action="{{ route('app.account.restore', $account->id) }}">
+                            {{ method_field('PUT') }}
                             {{ csrf_field() }}
+
                             <div class="button-group">
                                 <button type="submit">Restore</button>
                                 <a href="{{ route('app.account.edit', $account->id) }}" class="button">Edit</a>
@@ -28,17 +30,17 @@
                 </header>
 
                 <div class="input">
-                    Name:
+                    Name
                     <div>{{ $account->name }}</div>
                 </div>
 
                 <div class="input">
-                    Owner:
+                    Owner
                     <div>{{ $account->user->name }}</div>
                 </div>
 
                 <div class="input">
-                    Address:
+                    Address
                     <div>
                         {{ $account->street_name}}
                         {{ $account->street_number }}, {{ $account->zip }}
@@ -47,7 +49,7 @@
                 </div>
 
                 <div class="input">
-                    CVR:
+                    CVR
                     <div>{{ $account->cvr }}</div>
                 </div>
 
@@ -57,12 +59,12 @@
                 </div>
 
                 <div class="input">
-                    Email:
+                    Email
                     <div>{{ $account->email }}</div>
                 </div>
 
                 <div class="input">
-                    Website:
+                    Website
                     <div><a href="//{{ $account->website }}">{{ $account->website }}</a></div>
                 </div>
             </div>

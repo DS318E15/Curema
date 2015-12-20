@@ -92,7 +92,6 @@ $factory->define(Curema\Models\App\Opportunity::class, function (Faker\Generator
         'opportunity_stage_id' => $faker->numberBetween(1, 4),
         'user_id' => $faker->numberBetween(1, 30),
         'account_id' => $faker->numberBetween(1, 5),
-        'closing_at' => $faker->dateTime(),
     ];
 });
 

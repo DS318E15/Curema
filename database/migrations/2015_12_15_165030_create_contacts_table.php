@@ -27,7 +27,7 @@ class CreateContactsTable extends Migration
             $table->integer('user_id');
             $table->integer('account_id');
 
-            $table->boolean('active')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

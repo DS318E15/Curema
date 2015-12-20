@@ -11,11 +11,21 @@
     <div class="panel">
         <header>
             <a href="{{ route('app.lead.show', $lead->id) }}" class="button">Back</a>
-            <form method="POST"
-                  action="{{ route($lead->active ? 'app.lead.destroy' : 'app.lead.restore', $lead->id) }}">
-                {{ csrf_field() }}
-                <button type="submit">{{ $lead->active ? 'Destroy' : 'Restore' }}</button>
-            </form>
+            @if($lead->trashed())
+                <form method="POST" action="{{ route('app.lead.restore', $lead->id) }}">
+                    {{ method_field('PUT') }}
+                    {{ csrf_field() }}
+
+                    <button type="submit">Restore</button>
+                </form>
+            @else
+                <form method="post" action="{{ route('app.lead.destroy', $lead->id) }}">
+                    {{ method_field('DELETE') }}
+                    {{ csrf_field() }}
+
+                    <button type="submit">Delete</button>
+                </form>
+            @endif
         </header>
 
         <form method="POST" action="{{ route('app.lead.update', $lead->id) }}">

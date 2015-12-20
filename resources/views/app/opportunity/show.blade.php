@@ -14,9 +14,11 @@
                 <header>
                     <a href="{{ route('app.opportunity.index') }}" class="button">Back</a>
 
-                    @if(!$opportunity->active)
+                    @if($opportunity->trashed())
                         <form method="POST" action="{{ route('app.opportunity.restore', $opportunity->id) }}">
+                            {{ method_field('PUT') }}
                             {{ csrf_field() }}
+
                             <div class="button-group">
                                 <button type="submit">Restore</button>
                                 <a href="{{ route('app.opportunity.edit', $opportunity->id) }}" class="button">Edit</a>
@@ -27,10 +29,29 @@
                     @endif
                 </header>
 
-                <div class="input">
-                    Stage:
-                    <div>{{ $opportunity->opportunityStage->name }}</div>
-                </div>
+                <form method="post" action="{{ route('app.opportunity.stage', $opportunity->id) }}">
+                    {{ csrf_field() }}
+                    {{ method_field('PUT') }}
+                    <section class="stages">
+                        <div class="button-group">
+                            @foreach($stages as $key => $stage)
+                                @if($key < 3)
+                                    <button type="submit" name="opportunity_stage_id" value="{{ $stage->id }}"
+                                            @if($opportunity->opportunityStage->id == $stage->id) class="active" @endif>{{ $stage->name }}</button>
+                                @endif
+                            @endforeach
+                        </div>
+                        <div class="button-group">
+
+                            @foreach($stages as $key => $stage)
+                                @if($key >= 3)
+                                    <button type="submit" name="opportunity_stage_id" value="{{ $stage->id }}"
+                                            @if($opportunity->opportunityStage->id == $stage->id) class="active" @endif>{{ $stage->name }}</button>
+                                @endif
+                            @endforeach
+                        </div>
+                    </section>
+                </form>
 
                 <div class="input">
                     Name:
@@ -64,7 +85,7 @@
                     <h1>Activities</h1>
                     <a href="{{ route('app.opportunity.activities', $opportunity->id) }}" class="button">Show all</a>
                 </header>
-                @include('app.opportunity.activity')
+
             </div>
         </section>
     </div>

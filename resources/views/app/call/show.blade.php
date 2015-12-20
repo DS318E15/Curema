@@ -49,7 +49,7 @@
                     <h1>Activities</h1>
                     <a href="{{ route('app.call.activities', $call->id) }}" class="button">Show all</a>
                 </header>
-                @include('app.call.activity')
+
             </div>
         </section>
     </div>

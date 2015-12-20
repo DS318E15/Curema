@@ -3,9 +3,12 @@
 namespace Curema\Models\App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Lead extends Model
 {
+    use SoftDeletes;
+
     protected $guarded = [];
 
     public function changes()
@@ -15,6 +18,6 @@ class Lead extends Model
 
     public function user()
     {
-        return $this->belongsTo('Curema\Models\User')->orderBy('updated_at', 'DESC');;
+        return $this->belongsTo('Curema\Models\User')->orderBy('updated_at', 'DESC');
     }
 }

@@ -14,9 +14,11 @@
                 <header>
                     <a href="{{ route('app.contact.index') }}" class="button">Back</a>
 
-                    @if(!$contact->active)
+                    @if($contact->trashed())
                         <form method="POST" action="{{ route('app.contact.restore', $contact->id) }}">
+                            {{ method_field('PUT') }}
                             {{ csrf_field() }}
+
                             <div class="button-group">
                                 <button type="submit">Restore</button>
                                 <a href="{{ route('app.contact.edit', $contact->id) }}" class="button">Edit</a>
@@ -74,7 +76,7 @@
                     <h1>Activities</h1>
                     <a href="{{ route('app.contact.activities', $contact->id) }}" class="button">Show all</a>
                 </header>
-                @include('app.contact.activity')
+
             </div>
         </section>
     </div>

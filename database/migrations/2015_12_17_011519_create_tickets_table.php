@@ -20,8 +20,8 @@ class CreateTicketsTable extends Migration
             $table->integer('user_id');
             $table->integer('contact_id')->nullable();
             $table->integer('account_id')->nullable();
-            $table->boolean('active')->default(1);
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

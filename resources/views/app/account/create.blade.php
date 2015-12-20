@@ -19,7 +19,7 @@
             <div class="row">
                 <fieldset class="col-xs-8">
                     <label>
-                        Name
+                        Name*
                         <input type="text" name="name" value="{{ old('name') }}">
                         @if($errors->has('name'))
                             <small class="error">{{ $errors->first('name') }}</small>

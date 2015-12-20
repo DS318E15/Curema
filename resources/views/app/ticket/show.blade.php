@@ -14,9 +14,11 @@
                 <header>
                     <a href="{{ route('app.ticket.index') }}" class="button">Back</a>
 
-                    @if(!$ticket->active)
+                    @if($ticket->trashed())
                         <form method="POST" action="{{ route('app.ticket.restore', $ticket->id) }}">
+                            {{ method_field('PUT') }}
                             {{ csrf_field() }}
+
                             <div class="button-group">
                                 <button type="submit">Restore</button>
                                 <a href="{{ route('app.ticket.edit', $ticket->id) }}" class="button">Edit</a>
@@ -74,7 +76,7 @@
                     <h1>Activities</h1>
                     <a href="{{ route('app.ticket.activities', $ticket->id) }}" class="button">Show all</a>
                 </header>
-                @include('app.ticket.activity')
+
             </div>
         </section>
     </div>

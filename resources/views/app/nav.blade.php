@@ -4,16 +4,16 @@
            class="{{ Ekko::areActiveRoutes(['app.dashboard.index']) }}">Dashboard</a>
     </li>
     <li>
+        <a href="{{ route('app.account.index') }}"
+           class="{{ Ekko::areActiveRoutes(['app.account.index', 'app.account.create', 'app.account.show', 'app.account.edit', 'app.account.trash', 'app.account.activities']) }}">Accounts</a>
+    </li>
+    <li>
         <a href="{{ route('app.opportunity.index') }}"
            class="{{ Ekko::areActiveRoutes(['app.opportunity.index', 'app.opportunity.create', 'app.opportunity.show', 'app.opportunity.edit', 'app.opportunity.trash', 'app.opportunity.activities']) }}">Opportunities</a>
     </li>
     <li>
         <a href="{{ route('app.lead.index') }}"
            class="{{ Ekko::areActiveRoutes(['app.lead.index', 'app.lead.create', 'app.lead.show', 'app.lead.edit', 'app.lead.trash', 'app.lead.activities']) }}">Leads</a>
-    </li>
-    <li>
-        <a href="{{ route('app.account.index') }}"
-           class="{{ Ekko::areActiveRoutes(['app.account.index', 'app.account.create', 'app.account.show', 'app.account.edit', 'app.account.trash', 'app.account.activities']) }}">Accounts</a>
     </li>
     <li>
         <a href="{{ route('app.contact.index') }}"

@@ -1216,6 +1216,8 @@ main {
       margin: 0;
       font-weight: 300;
       font-size: 1.875rem; }
+  main > form > .row {
+    margin-bottom: 30px; }
   main .panel {
     padding: 30px;
     border-radius: 3px;
@@ -1246,5 +1248,34 @@ main {
       main .panel.activities .activity:last-of-type {
         border: 0;
         padding-bottom: 0; }
+
+.stages {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: 30px; }
+  .stages .button-group:first-of-type {
+    -webkit-flex: 1 0 60%;
+    -ms-flex: 1 0 60%;
+    flex: 1 0 60%; }
+  .stages .button-group:last-of-type {
+    -webkit-flex: 1 0 40%;
+    -ms-flex: 1 0 40%;
+    flex: 1 0 40%;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end; }
+  .stages button {
+    height: 30px;
+    line-height: 30px;
+    padding: 0 15px; }
+    .stages button:nth-child(4) {
+      margin-left: 30px; }
+  .stages .active {
+    background-color: #252d3a;
+    color: #ffffff; }
 
 /*# sourceMappingURL=app.css.map */

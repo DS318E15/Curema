@@ -15,6 +15,7 @@ class OpportunityStageTableSeeder extends Seeder
         OpportunityStage::create(["name" => "Qualification"]);
         OpportunityStage::create(["name" => "Proposal"]);
         OpportunityStage::create(["name" => "Negotiation"]);
-        OpportunityStage::create(["name" => "Closed"]);
+        OpportunityStage::create(["name" => "Closed Won"]);
+        OpportunityStage::create(["name" => "Closed Lost"]);
     }
 }

@@ -24,10 +24,10 @@ class CreateUsersTable extends Migration
             $table->string('country')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->unique();
-            $table->string('password', 60);
 
-            $table->boolean('active')->default(1);
+            $table->string('password', 60);
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

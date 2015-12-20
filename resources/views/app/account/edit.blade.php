@@ -11,11 +11,21 @@
     <div class="panel">
         <header>
             <a href="{{ route('app.account.show', $account->id) }}" class="button">Back</a>
-            <form method="POST"
-                  action="{{ route($account->active ? 'app.account.destroy' : 'app.account.restore', $account->id) }}">
-                {{ csrf_field() }}
-                <button type="submit">{{ $account->active ? 'Destroy' : 'Restore' }}</button>
-            </form>
+            @if($account->trashed())
+                <form method="POST" action="{{ route('app.account.restore', $account->id) }}">
+                    {{ method_field('PUT') }}
+                    {{ csrf_field() }}
+
+                    <button type="submit">Restore</button>
+                </form>
+            @else
+                <form method="post" action="{{ route('app.account.destroy', $account->id) }}">
+                    {{ method_field('DELETE') }}
+                    {{ csrf_field() }}
+
+                    <button type="submit">Delete</button>
+                </form>
+            @endif
         </header>
 
         <form method="POST" action="{{ route('app.account.update', $account->id) }}">
@@ -25,7 +35,7 @@
             <div class="row">
                 <fieldset class="col-xs-8">
                     <label>
-                        Name
+                        Name*
                         <input type="text" name="name" value="{{ old('name', $account->name) }}">
                         @if($errors->has('name'))
                             <small class="error">{{ $errors->first('name') }}</small>
@@ -112,7 +122,8 @@
                 <fieldset class="col-xs-3">
                     <label>
                         Steet No.
-                        <input type="text" name="street_number" value="{{ old('street_number', $account->street_number) }}">
+                        <input type="text" name="street_number"
+                               value="{{ old('street_number', $account->street_number) }}">
                         @if($errors->has('street_number'))
                             <small class="error">{{ $errors->first('street_number') }}</small>
                         @endif

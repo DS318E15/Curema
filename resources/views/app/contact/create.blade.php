@@ -20,9 +20,9 @@
                 <fieldset class="col-xs-8">
                     <label>
                         Name*
-                        <input type="text" name="firstname" value="{{ old('firstname') }}">
-                        @if($errors->has('firstname'))
-                            <small class="error">{{ $errors->first('firstname') }}</small>
+                        <input type="text" name="name" value="{{ old('name') }}">
+                        @if($errors->has('name'))
+                            <small class="error">{{ $errors->first('name') }}</small>
                         @endif
                     </label>
                 </fieldset>
@@ -65,6 +65,7 @@
                     <label>
                         Account*
                         <select name="account_id">
+                            <option value=""></option>
                             @foreach($accounts as $account)
                                 @if($account->id == old('account_id'))
                                     <option value="{{ $account->id }}" selected>{{ $account->name }}</option>

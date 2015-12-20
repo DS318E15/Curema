@@ -11,11 +11,21 @@
     <div class="panel">
         <header>
             <a href="{{ route('app.contact.show', $contact->id) }}" class="button">Back</a>
-            <form method="POST"
-                  action="{{ route($contact->active ? 'app.contact.destroy' : 'app.contact.restore', $contact->id) }}">
-                {{ csrf_field() }}
-                <button type="submit">{{ $contact->active ? 'Destroy' : 'Restore' }}</button>
-            </form>
+            @if($contact->trashed())
+                <form method="POST" action="{{ route('app.contact.restore', $contact->id) }}">
+                    {{ method_field('PUT') }}
+                    {{ csrf_field() }}
+
+                    <button type="submit">Restore</button>
+                </form>
+            @else
+                <form method="post" action="{{ route('app.contact.destroy', $contact->id) }}">
+                    {{ method_field('DELETE') }}
+                    {{ csrf_field() }}
+
+                    <button type="submit">Delete</button>
+                </form>
+            @endif
         </header>
 
         <form method="POST" action="{{ route('app.contact.update', $contact->id) }}">

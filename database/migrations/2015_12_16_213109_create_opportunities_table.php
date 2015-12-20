@@ -14,13 +14,14 @@ class CreateOpportunitiesTable extends Migration
     {
         Schema::create('opportunities', function (Blueprint $table) {
             $table->increments('id');
+
             $table->string('name');
-            $table->string('amount');
-            $table->string('opportunity_stage_id')->default(1);;
-            $table->integer('user_id');
+            $table->string('amount')->nullable();
+            $table->integer('opportunity_stage_id')->default(1);
             $table->integer('account_id');
-            $table->boolean('active')->default(1);
-            $table->dateTime('closing_at');
+            $table->integer('user_id');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

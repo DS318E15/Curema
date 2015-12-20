@@ -14,7 +14,9 @@ class CreateOpportunityStagesTable extends Migration
     {
         Schema::create('opportunity_stages', function (Blueprint $table) {
             $table->increments('id');
+
             $table->string('name');
+
             $table->timestamps();
         });
     }

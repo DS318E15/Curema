@@ -7,49 +7,74 @@ use Illuminate\Http\Request;
 
 use Curema\Http\Requests;
 use Curema\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('app.employee.index', ['employees' => User::where('active', 1)->orderBy('updated_at', 'DESC')->get()]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $user = User::find($id);
-
-        return view('app.employee.show', [
-            'employee' => $user,
-            'changes' => $user->changes->take(5)
+        return view('app.employee.index', [
+            'employees' => User::orderBy('updated_at', 'DESC')->get()
         ]);
     }
 
-    /**
-     * Display a listing of all activites on this ressource.
-     *
-     * @param $id
-     * @return \Illuminate\Http\Response
-     */
+    public function create()
+    {
+        //
+    }
+
+    public function store(Request $request)
+    {
+        //
+    }
+
+    public function show($id)
+    {
+        return view('app.employee.show', [
+            'employee' => User::withTrashed()->find($id)
+        ]);
+    }
+
+    public function edit($id)
+    {
+        return view('app.account.edit', [
+            'employee' => User::withTrashed()->find($id),
+        ]);
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $employee = User::find($id);
+        $employee->delete();
+
+        $request->session()
+            ->flash('alert-success', 'Employee was successfully destroyed!');
+
+        return redirect()->route('app.employee.index');
+    }
+
+    public function restore(Request $request, $id)
+    {
+        $employee = User::withTrashed()->find($id);
+        $employee->restore();
+
+        $request->session()
+            ->flash('alert-success', 'Employee was successfully restored!');
+
+        return redirect()->back();
+    }
+
+    public function trash()
+    {
+        return view('app.employee.trash', [
+            'employee' => User::onlyTrashed()
+                ->orderBy('updated_at', 'DESC')->get()
+        ]);
+    }
+
     public function activities($id)
     {
-        $user = User::find($id);
-
         return view('app.employee.activities', [
-            'employee' => $user,
-            'changes' => $user->changes
+            'employee' => User::find($id)
         ]);
     }
 }

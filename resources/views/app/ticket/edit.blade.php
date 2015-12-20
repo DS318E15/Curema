@@ -11,11 +11,21 @@
     <div class="panel">
         <header>
             <a href="{{ route('app.ticket.show', $ticket->id) }}" class="button">Back</a>
-            <form method="POST"
-                  action="{{ route($ticket->active ? 'app.ticket.destroy' : 'app.ticket.restore', $ticket->id) }}">
-                {{ csrf_field() }}
-                <button type="submit">{{ $ticket->active ? 'Destroy' : 'Restore' }}</button>
-            </form>
+            @if($ticket->trashed())
+                <form method="POST" action="{{ route('app.ticket.restore', $ticket->id) }}">
+                    {{ method_field('PUT') }}
+                    {{ csrf_field() }}
+
+                    <button type="submit">Restore</button>
+                </form>
+            @else
+                <form method="post" action="{{ route('app.ticket.destroy', $ticket->id) }}">
+                    {{ method_field('DELETE') }}
+                    {{ csrf_field() }}
+
+                    <button type="submit">Delete</button>
+                </form>
+            @endif
         </header>
 
         <form method="POST" action="{{ route('app.ticket.update', $ticket->id) }}">

@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="input">
-                    Email From
+                    Content
                     <div>{{ $email->content }}</div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                     <h1>Activities</h1>
                     <a href="{{ route('app.email.activities', $email->id) }}" class="button">Show all</a>
                 </header>
-               @include('app.email.activity')
+
             </div>
         </section>
     </div>

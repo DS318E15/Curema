@@ -3,19 +3,23 @@
 namespace Curema\Models\App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Account extends Model
 {
+    use SoftDeletes;
+
     protected $guarded = [];
 
     public function user()
     {
-        return $this->belongsTo('Curema\Models\User')->orderBy('updated_at', 'DESC');
+        return $this->belongsTo('Curema\Models\User')
+            ->orderBy('updated_at', 'DESC');
     }
 
     public function changes()
     {
-        return $this->hasMany('Curema\Models\App\Change')->orderBy('updated_at', 'DESC');;
+        return $this->hasMany('Curema\Models\App\Change')
+            ->orderBy('updated_at', 'DESC');
     }
-
 }

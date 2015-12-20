@@ -14,11 +14,14 @@ class CreateCallsTable extends Migration
     {
         Schema::create('calls', function (Blueprint $table) {
             $table->increments('id');
+
             $table->integer('lead_id')->nullable();
             $table->integer('contact_id')->nullable();
             $table->integer('account_id')->nullable();
             $table->integer('user_id')->nullable();
             $table->string('content');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

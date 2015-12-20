@@ -16,6 +16,7 @@ class CreateLeadsTable extends Migration
             $table->increments('id');
 
             $table->string('name');
+            $table->string('company');
             $table->string('title')->nullable();
             $table->string('street_name')->nullable();
             $table->string('street_number')->nullable();
@@ -24,10 +25,9 @@ class CreateLeadsTable extends Migration
             $table->string('country')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
-            $table->string('company');
             $table->integer('user_id');
 
-            $table->boolean('active')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

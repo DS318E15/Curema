@@ -1,0 +1,29 @@
+.stages {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+
+  .button-group:first-of-type {
+    flex: 1 0 60%;
+  }
+
+  .button-group:last-of-type {
+    flex: 1 0 40%;
+    justify-content: flex-end;
+  }
+
+  button {
+    height: 30px;
+    line-height: 30px;
+    padding: 0 15px;
+
+    &:nth-child(4) {
+      margin-left: 30px;
+    }
+  }
+
+  .active {
+    background-color: $ebony-clay;
+    color: $white;
+  }
+}

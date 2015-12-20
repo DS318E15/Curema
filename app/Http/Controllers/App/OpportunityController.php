@@ -2,47 +2,32 @@
 
 namespace Curema\Http\Controllers\App;
 
-use Curema\Models\App\Account;
-use Curema\Models\App\Change;
-use Curema\Models\App\Opportunity;
 use Curema\Models\User;
+use Curema\Models\App\Account;
+use Curema\Models\App\Opportunity;
+use Curema\Models\App\OpportunityStage;
 use Illuminate\Http\Request;
 
 use Curema\Http\Requests;
 use Curema\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class OpportunityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('app.opportunity.index', ['opportunities' => Opportunity::where('active', 1)->orderBy('updated_at', 'DESC')->get()]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('app.opportunity.create', [
-            'users' => User::where('active', 1)->get(),
-            'accounts' => Account::where('active', 1)->get(),
+        return view('app.opportunity.index', [
+            'opportunities' => Opportunity::orderBy('updated_at', 'DESC')->get()
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+    public function create()
+    {
+        return view('app.opportunity.create', [
+            'users' => User::orderBy('name', 'ASC')->get(),
+            'accounts' => Account::orderBy('name', 'ASC')->get(),
+        ]);
+    }
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -51,58 +36,33 @@ class OpportunityController extends Controller
             'account_id' => 'required',
         ]);
 
-        $opportunity = new Opportunity($request->all());
+        $opportunity = new Opportunity;
+        $opportunity->fill($request->all());
         $opportunity->save();
 
-        Change::create([
-            "type" => "create",
-            "opportunity_id" => $opportunity->id,
-            "account_id" => $opportunity->account_id,
-            "user_id" => Auth::user()->id,
-        ]);
+        $request->session()
+            ->flash('alert-success', 'Opportunity was successfully created!');
 
-        $request->session()->flash('alert-success', 'Opportunity was successfully created!');
         return redirect()->route('app.opportunity.show', $opportunity->id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        $opportunity = Opportunity::find($id);
-
         return view('app.opportunity.show', [
-            'opportunity' => $opportunity,
-            'changes' => $opportunity->changes->take(5)
+            'opportunity' => Opportunity::withTrashed()->find($id),
+            'stages' => OpportunityStage::all(),
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         return view('app.opportunity.edit', [
-            'users' => User::all(),
-            'accounts' => Account::all(),
-            'opportunity' => Opportunity::find($id),
+            'opportunity' => Opportunity::withTrashed()->find($id),
+            'users' => User::orderBy('name', 'ASC')->get(),
+            'accounts' => Account::orderBy('name', 'ASC')->get(),
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -115,88 +75,59 @@ class OpportunityController extends Controller
         $opportunity->fill($request->all());
         $opportunity->save();
 
-        Change::create([
-            "type" => "update",
-            "opportunity_id" => $opportunity->id,
-            "account_id" => $opportunity->account_id,
-            "user_id" => Auth::user()->id,
-        ]);
+        $request->session()
+            ->flash('alert-success', 'Opportunity was successfully updated!');
 
-        $request->session()->flash('alert-success', 'Opportunity was successfully updated!');
         return redirect()->back();
     }
 
-    /**
-     * Deactivate the specified resource.
-     *
-     * @param Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request, $id)
     {
         $opportunity = Opportunity::find($id);
-        $opportunity->active = 0;
-        $opportunity->save();
+        $opportunity->delete();
 
-        Change::create([
-            "type" => "destroy",
-            "opportunity_id" => $opportunity->id,
-            "account_id" => $opportunity->account_id,
-            "user_id" => Auth::user()->id,
-        ]);
+        $request->session()
+            ->flash('alert-success', 'Opportunity was successfully destroyed!');
 
-        $request->session()->flash('alert-success', 'Opportunity was successfully destroyed!');
         return redirect()->route('app.opportunity.index');
     }
 
-    /**
-     * Activate the specified resource.
-     *
-     * @param Request $request
-     * @param $id
-     * @return \Illuminate\Http\Response
-     */
     public function restore(Request $request, $id)
     {
-        $opportunity = Opportunity::find($id);
-        $opportunity->active = 1;
-        $opportunity->save();
+        $opportunity = Account::withTrashed()->find($id);
+        $opportunity->restore();
 
-        Change::create([
-            "type" => "restore",
-            "opportunity_id" => $opportunity->id,
-            "account_id" => $opportunity->account_id,
-            "user_id" => Auth::user()->id,
-        ]);
+        $request->session()
+            ->flash('alert-success', 'Opportunity was successfully restored!');
 
-        $request->session()->flash('alert-success', 'Opportunity was successfully restored!');
         return redirect()->back();
     }
 
-    /**
-     * Display a listing of the softdeleted resources.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function trash()
     {
-        return view('app.opportunity.trash', ['opportunities' => Opportunity::where('active', 0)->get()]);
+        return view('app.opportunity.trash', [
+            'opportunities' => Opportunity::onlyTrashed()
+                ->orderBy('updated_at', 'DESC')->get()
+        ]);
     }
 
-    /**
-     * Display a listing of all activites on this ressource.
-     *
-     * @param $id
-     * @return \Illuminate\Http\Response
-     */
     public function activities($id)
     {
-        $opportunity = Opportunity::find($id);
-
         return view('app.opportunity.activities', [
-            'opportunity' => $opportunity,
-            'changes' => $opportunity->changes
+            'opportunity' => Opportunity::find($id)
         ]);
+    }
+
+    public function stage(Request $request, $id)
+    {
+        $this->validate($request, [
+            'opportunity_stage_id' => 'required',
+        ]);
+
+        $opportunity = Opportunity::withTrashed()->find($id);
+        $opportunity->opportunity_stage_id = $request->opportunity_stage_id;
+        $opportunity->save();
+
+        return redirect()->back();
     }
 }
