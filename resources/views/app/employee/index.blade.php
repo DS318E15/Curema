@@ -5,10 +5,10 @@
     <header>
         <h1>Employees</h1>
 
-        @permission('create.users')
+        @permission('edit.users')
         <div class="button-group">
-            <a href="{{ route('app.lead.create') }}" class="button">Create</a>
-            <a href="{{ route('app.lead.trash') }}" class="button icon-trash"></a>
+            <a href="{{ route('app.employee.create') }}" class="button">Create</a>
+            <a href="{{ route('app.employee.trash') }}" class="button icon-trash"></a>
         </div>
         @endpermission
 

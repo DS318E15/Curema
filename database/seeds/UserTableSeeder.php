@@ -14,6 +14,7 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+        // roles
         $superiorRole = Role::create([
             'name' => 'Superior',
             'slug' => 'superior',
@@ -29,20 +30,28 @@ class UserTableSeeder extends Seeder
             'slug' => 'supporter',
         ]);
 
-        $superiorRole->attachPermission(Permission::create([
-            'name' => 'Create users',
-            'slug' => 'create.users',
-        ]));
-
-        $superiorRole->attachPermission(Permission::create([
+        $editUsersPermission = Permission::create([
             'name' => 'Edit users',
             'slug' => 'edit.users',
-        ]));
+        ]);
 
-        $superiorRole->attachPermission(Permission::create([
-            'name' => 'Delete users',
-            'slug' => 'delete.users',
-        ]));
+        $viewLeadsPermission = Permission::create([
+            'name' => 'View leads',
+            'slug' => 'view.leads',
+        ]);
+
+        $viewOpportunityPermission = Permission::create([
+            'name' => 'View opportunities',
+            'slug' => 'view.opportunities',
+        ]);
+
+        // assing permissions to roles
+        $superiorRole->attachPermission($editUsersPermission);
+        $superiorRole->attachPermission($viewLeadsPermission);
+        $superiorRole->attachPermission($viewOpportunityPermission);
+
+        $salespersonRole->attachPermission($viewLeadsPermission);
+        $salespersonRole->attachPermission($viewOpportunityPermission);
 
         $user = User::create([
             'name' => 'Rasmus Nørskov',
@@ -56,7 +65,6 @@ class UserTableSeeder extends Seeder
             'email' => 'rnarsk14@student.aau.dk',
             'password' => bcrypt('password'),
         ]);
-
         $user->attachRole($superiorRole);
 
         $user = User::create([
@@ -71,7 +79,6 @@ class UserTableSeeder extends Seeder
             'email' => 'asomme14@student.aau.dk',
             'password' => bcrypt('password'),
         ]);
-
         $user->attachRole($salespersonRole);
 
         $user = User::create([
@@ -86,7 +93,6 @@ class UserTableSeeder extends Seeder
             'email' => 'nembo14@student.aau.dk',
             'password' => bcrypt('password'),
         ]);
-
         $user->attachRole($supporterRole);
 
         factory(Curema\Models\User::class, 27)->create();

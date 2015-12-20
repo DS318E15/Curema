@@ -2,6 +2,7 @@
 
 namespace Curema\Http\Controllers\App;
 
+use Bican\Roles\Models\Role;
 use Curema\Models\User;
 use Illuminate\Http\Request;
 
@@ -19,12 +20,31 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        //
+        return view('app.employee.create', [
+            'roles' => Role::all()
+        ]);
     }
 
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required|confirmed',
+        ]);
+
+        $user = new User;
+        $user->fill($request->all());
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        $user->detachAllRoles();
+        $user->attachRole(Role::find($request->role_id));
+
+        $request->session()
+            ->flash('alert-success', 'Employee was successfully created!');
+
+        return redirect()->route('app.employee.show', $user->id);
     }
 
     public function show($id)
@@ -38,7 +58,29 @@ class EmployeeController extends Controller
     {
         return view('app.employee.edit', [
             'employee' => User::withTrashed()->find($id),
+            'roles' => Role::all(),
         ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'confirmed',
+        ]);
+
+        $user = User::find($id);
+        $user->fill($request->all());
+        $user->save();
+
+        $user->detachAllRoles();
+        $user->attachRole(Role::find($request->role_id));
+
+        $request->session()
+            ->flash('alert-success', 'Employee was successfully updated!');
+
+        return redirect()->back();
     }
 
     public function destroy(Request $request, $id)

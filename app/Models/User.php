@@ -17,7 +17,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, HasRoleAndPermission;
 
-    protected $fillable = ['name', 'email', 'password'];
+    protected $guarded = ['password_confirmation', 'role_id'];
 
     protected $hidden = ['password', 'remember_token'];
 
@@ -26,5 +26,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function changes()
     {
         return $this->hasMany('Curema\Models\App\Change')->orderBy('updated_at', 'DESC');
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany('Bican\Roles\Models\Role');
     }
 }
