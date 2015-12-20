@@ -92,7 +92,7 @@
                         Owner*
                         <select name="user_id">
                             @foreach($users as $user)
-                                @if($user->id == old('user_id', Auth::user()->id))
+                                @if($user->id == old('user_id', $lead->user_id))
                                     <option value="{{ $user->id }}" selected>{{ $user->name }}</option>
                                 @else
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>

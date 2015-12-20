@@ -82,7 +82,7 @@
                         Account*
                         <select name="account_id">
                             @foreach($accounts as $account)
-                                @if($account->id == old('account_id', $account->id))
+                                @if($account->id == old('account_id', $contact->account_id))
                                     <option value="{{ $account->id }}" selected>{{ $account->name }}</option>
                                 @else
                                     <option value="{{ $account->id }}">{{ $account->name }}</option>
@@ -100,7 +100,7 @@
                         Owner*
                         <select name="user_id">
                             @foreach($users as $user)
-                                @if($user->id == old('user_id', Auth::user()->id))
+                                @if($user->id == old('user_id', $contact->user_id))
                                     <option value="{{ $user->id }}" selected>{{ $user->name }}</option>
                                 @else
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
