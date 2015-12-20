@@ -80,7 +80,7 @@ class OpportunityController extends Controller
             'account_id' => 'required'
         ]);
 
-        $opportunity = Opportunity::find($id);
+        $opportunity = Opportunity::withTrashed()->find($id);
         $opportunity->fill($request->all());
         $opportunity->save();
 
@@ -147,7 +147,7 @@ class OpportunityController extends Controller
     public function activities($id)
     {
         return view('app.opportunity.activities', [
-            'opportunity' => Opportunity::find($id)
+            'opportunity' => Opportunity::withTrashed()->find($id)
         ]);
     }
 
@@ -160,6 +160,14 @@ class OpportunityController extends Controller
         $opportunity = Opportunity::withTrashed()->find($id);
         $opportunity->opportunity_stage_id = $request->opportunity_stage_id;
         $opportunity->save();
+
+        Change::create([
+            'type' => 'stage',
+            'subject' => 'opportunity',
+            'user_id' => auth()->user()->id,
+            'account_id' => $opportunity->account_id,
+            'opportunity_id' => $opportunity->id,
+        ]);
 
         return redirect()->back();
     }

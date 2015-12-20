@@ -76,7 +76,7 @@ class LeadController extends Controller
             'user_id' => 'required',
         ]);
 
-        $lead = Lead::find($id);
+        $lead = Lead::withTrashed()->find($id);
         $lead->fill($request->all());
         $lead->save();
 
@@ -140,7 +140,7 @@ class LeadController extends Controller
     public function activities($id)
     {
         return view('app.lead.activities', [
-            'lead' => Lead::find($id)
+            'lead' => Lead::withTrashed()->find($id)
         ]);
     }
 

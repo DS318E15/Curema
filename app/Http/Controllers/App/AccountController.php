@@ -72,7 +72,7 @@ class AccountController extends Controller
             'user_id' => 'required',
         ]);
 
-        $account = Account::find($id);
+        $account = Account::withTrashed()->find($id);
         $account->fill($request->all());
         $account->save();
 
@@ -136,7 +136,7 @@ class AccountController extends Controller
     public function activities($id)
     {
         return view('app.account.activities', [
-            'account' => Account::find($id)
+            'account' => Account::withTrashed()->find($id)
         ]);
     }
 }

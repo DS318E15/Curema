@@ -17,7 +17,7 @@
                 changed
             @endif
 
-            @if($change->subject == 'account')
+            @if($change->subject == 'opportunity')
                 an <a href="{{ route('app.opportunity.show', $change->opportunity_id) }}">opportunity</a> on this
                 account
             @elseif($change->subject == 'contact')

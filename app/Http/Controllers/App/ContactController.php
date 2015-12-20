@@ -79,7 +79,7 @@ class ContactController extends Controller
             'account_id' => 'required',
         ]);
 
-        $contact = Contact::find($id);
+        $contact = Contact::withTrashed()->find($id);
         $contact->fill($request->all());
         $contact->save();
 
@@ -146,7 +146,7 @@ class ContactController extends Controller
     public function activities($id)
     {
         return view('app.contact.activities', [
-            'contact' => Contact::find($id)
+            'contact' => Contact::withTrashed()->find($id)
         ]);
     }
 }

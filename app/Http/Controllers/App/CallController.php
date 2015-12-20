@@ -84,7 +84,7 @@ class CallController extends Controller
             'user_id' => 'required',
         ]);
 
-        $call = Call::find($id);
+        $call = Call::withTrashed()->find($id);
         $call->fill($request->all());
         $call->save();
 
@@ -107,7 +107,7 @@ class CallController extends Controller
     public function activities($id)
     {
         return view('app.call.activities', [
-            'call' => Call::find($id)
+            'call' => Call::withTrashed()->find($id)
         ]);
     }
 }

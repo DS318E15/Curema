@@ -84,7 +84,7 @@ class EmailController extends Controller
             'user_id' => 'required',
         ]);
 
-        $email = Email::find($id);
+        $email = Email::withTrashed()->find($id);
         $email->fill($request->all());
         $email->save();
 
@@ -107,7 +107,7 @@ class EmailController extends Controller
     public function activities($id)
     {
         return view('app.email.activities', [
-            'email' => Email::find($id)
+            'email' => Email::withTrashed()->find($id)
         ]);
     }
 }

@@ -70,7 +70,7 @@ class EmployeeController extends Controller
             'password' => 'confirmed',
         ]);
 
-        $user = User::find($id);
+        $user = User::withTrashed()->find($id);
         $user->fill($request->all());
         $user->save();
 
@@ -116,7 +116,7 @@ class EmployeeController extends Controller
     public function activities($id)
     {
         return view('app.employee.activities', [
-            'employee' => User::find($id)
+            'employee' => User::withTrashed()->find($id)
         ]);
     }
 }

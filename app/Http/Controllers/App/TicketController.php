@@ -80,7 +80,7 @@ class TicketController extends Controller
             'user_id' => 'required'
         ]);
 
-        $ticket = Ticket::find($id);
+        $ticket = Ticket::withTrashed()->find($id);
         $ticket->fill($request->all());
         $ticket->save();
 
@@ -117,7 +117,7 @@ class TicketController extends Controller
 
     public function restore(Request $request, $id)
     {
-        $ticket = Ticket::find($id);
+        $ticket = Ticket::withTrashed()->find($id);
         $ticket->restore();
 
         Change::create([
@@ -144,7 +144,7 @@ class TicketController extends Controller
     public function activities($id)
     {
         return view('app.ticket.activities', [
-            'ticket' => Ticket::find($id)
+            'ticket' => Ticket::withTrashed()->find($id)
         ]);
     }
 }
