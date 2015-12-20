@@ -2,6 +2,7 @@
 
 namespace Curema\Http\Controllers\App;
 
+use Curema\Models\App\Change;
 use Curema\Models\User;
 use Curema\Models\App\Account;
 use Illuminate\Http\Request;
@@ -36,6 +37,13 @@ class AccountController extends Controller
         $account->fill($request->all());
         $account->save();
 
+        Change::create([
+            'type' => 'create',
+            'subject' => 'account',
+            'user_id' => auth()->user()->id,
+            'account_id' => $account->id,
+        ]);
+
         $request->session()
             ->flash('alert-success', 'Account was successfully created!');
 
@@ -68,6 +76,13 @@ class AccountController extends Controller
         $account->fill($request->all());
         $account->save();
 
+        Change::create([
+            'type' => 'update',
+            'subject' => 'account',
+            'user_id' => auth()->user()->id,
+            'account_id' => $account->id,
+        ]);
+
         $request->session()
             ->flash('alert-success', 'Account was successfully updated!');
 
@@ -79,6 +94,13 @@ class AccountController extends Controller
         $account = Account::find($id);
         $account->delete();
 
+        Change::create([
+            'type' => 'delete',
+            'subject' => 'account',
+            'user_id' => auth()->user()->id,
+            'account_id' => $account->id,
+        ]);
+
         $request->session()
             ->flash('alert-success', 'Account was successfully destroyed!');
 
@@ -89,6 +111,13 @@ class AccountController extends Controller
     {
         $account = Account::withTrashed()->find($id);
         $account->restore();
+
+        Change::create([
+            'type' => 'restore',
+            'subject' => 'account',
+            'user_id' => auth()->user()->id,
+            'account_id' => $account->id,
+        ]);
 
         $request->session()
             ->flash('alert-success', 'Account was successfully restored!');

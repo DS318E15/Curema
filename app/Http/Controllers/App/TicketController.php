@@ -2,6 +2,7 @@
 
 namespace Curema\Http\Controllers\App;
 
+use Curema\Models\App\Change;
 use Curema\Models\User;
 use Curema\Models\App\Account;
 use Curema\Models\App\Contact;
@@ -41,6 +42,13 @@ class TicketController extends Controller
         $ticket->fill($request->all());
         $ticket->save();
 
+        Change::create([
+            'type' => 'create',
+            'subject' => 'ticket',
+            'user_id' => auth()->user()->id,
+            'ticket_id' => $ticket->id,
+        ]);
+
         $request->session()
             ->flash('alert-success', 'Ticket was successfully created!');
 
@@ -76,6 +84,13 @@ class TicketController extends Controller
         $ticket->fill($request->all());
         $ticket->save();
 
+        Change::create([
+            'type' => 'update',
+            'subject' => 'ticket',
+            'user_id' => auth()->user()->id,
+            'ticket_id' => $ticket->id,
+        ]);
+
         $request->session()
             ->flash('alert-success', 'Ticket was successfully updated!');
 
@@ -87,6 +102,13 @@ class TicketController extends Controller
         $ticket = Ticket::find($id);
         $ticket->delete();
 
+        Change::create([
+            'type' => 'delete',
+            'subject' => 'ticket',
+            'user_id' => auth()->user()->id,
+            'ticket_id' => $ticket->id,
+        ]);
+
         $request->session()
             ->flash('alert-success', 'Ticket was successfully destroyed!');
 
@@ -97,6 +119,13 @@ class TicketController extends Controller
     {
         $ticket = Ticket::find($id);
         $ticket->restore();
+
+        Change::create([
+            'type' => 'restore',
+            'subject' => 'ticket',
+            'user_id' => auth()->user()->id,
+            'ticket_id' => $ticket->id,
+        ]);
 
         $request->session()
             ->flash('alert-success', 'Ticket was successfully restored!');

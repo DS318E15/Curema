@@ -15,7 +15,7 @@
     @endif
 
     <section class="panel activities">
-
+        @include('app.employee.activity')
     </section>
 
 @endsection

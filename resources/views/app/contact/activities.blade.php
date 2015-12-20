@@ -15,7 +15,7 @@
     @endif
 
     <section class="panel activities">
-
+        @include('app.contact.activity')
     </section>
 
 @endsection

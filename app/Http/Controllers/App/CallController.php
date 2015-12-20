@@ -2,6 +2,7 @@
 
 namespace Curema\Http\Controllers\App;
 
+use Curema\Models\App\Change;
 use Curema\Models\User;
 use Curema\Models\App\Call;
 use Curema\Models\App\Lead;
@@ -42,6 +43,16 @@ class CallController extends Controller
         $call->fill($request->all());
         $call->save();
 
+        Change::create([
+            'type' => 'create',
+            'subject' => 'call',
+            'user_id' => auth()->user()->id,
+            'call_id' => $call->id,
+            'lead_id' => $call->lead_id,
+            'contact_id' => $call->contact_id,
+            'account_id' => $call->account_id,
+        ]);
+
         $request->session()
             ->flash('alert-success', 'Call was successfully created!');
 
@@ -76,6 +87,16 @@ class CallController extends Controller
         $call = Call::find($id);
         $call->fill($request->all());
         $call->save();
+
+        Change::create([
+            'type' => 'update',
+            'subject' => 'call',
+            'user_id' => auth()->user()->id,
+            'call_id' => $call->id,
+            'lead_id' => $call->lead_id,
+            'contact_id' => $call->contact_id,
+            'account_id' => $call->account_id,
+        ]);
 
         $request->session()
             ->flash('alert-success', 'Call was successfully updated!');

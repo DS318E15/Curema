@@ -2,6 +2,7 @@
 
 namespace Curema\Http\Controllers\App;
 
+use Curema\Models\App\Change;
 use Curema\Models\User;
 use Curema\Models\App\Email;
 use Curema\Models\App\Lead;
@@ -42,6 +43,16 @@ class EmailController extends Controller
         $email->fill($request->all());
         $email->save();
 
+        Change::create([
+            'type' => 'create',
+            'subject' => 'email',
+            'user_id' => auth()->user()->id,
+            'email_id' => $email->id,
+            'lead_id' => $email->lead_id,
+            'contact_id' => $email->contact_id,
+            'account_id' => $email->account_id,
+        ]);
+
         $request->session()
             ->flash('alert-success', 'Email was successfully created!');
 
@@ -76,6 +87,16 @@ class EmailController extends Controller
         $email = Email::find($id);
         $email->fill($request->all());
         $email->save();
+
+        Change::create([
+            'type' => 'update',
+            'subject' => 'email',
+            'user_id' => auth()->user()->id,
+            'email_id' => $email->id,
+            'lead_id' => $email->lead_id,
+            'contact_id' => $email->contact_id,
+            'account_id' => $email->account_id,
+        ]);
 
         $request->session()
             ->flash('alert-success', 'Email was successfully updated!');

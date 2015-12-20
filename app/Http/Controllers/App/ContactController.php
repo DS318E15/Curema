@@ -2,6 +2,7 @@
 
 namespace Curema\Http\Controllers\App;
 
+use Curema\Models\App\Change;
 use Curema\Models\User;
 use Curema\Models\App\Account;
 use Curema\Models\App\Contact;
@@ -40,6 +41,14 @@ class ContactController extends Controller
         $contact->fill($request->all());
         $contact->save();
 
+        Change::create([
+            'type' => 'create',
+            'subject' => 'contact',
+            'user_id' => auth()->user()->id,
+            'contact_id' => $contact->id,
+            'account_id' => $contact->account_id,
+        ]);
+
         $request->session()
             ->flash('alert-success', 'Contact was successfully created!');
 
@@ -74,6 +83,14 @@ class ContactController extends Controller
         $contact->fill($request->all());
         $contact->save();
 
+        Change::create([
+            'type' => 'update',
+            'subject' => 'contact',
+            'user_id' => auth()->user()->id,
+            'contact_id' => $contact->id,
+            'account_id' => $contact->account_id,
+        ]);
+
         $request->session()
             ->flash('alert-success', 'Contact was successfully updated!');
 
@@ -85,6 +102,14 @@ class ContactController extends Controller
         $contact = Contact::find($id);
         $contact->delete();
 
+        Change::create([
+            'type' => 'delete',
+            'subject' => 'contact',
+            'user_id' => auth()->user()->id,
+            'contact_id' => $contact->id,
+            'account_id' => $contact->account_id,
+        ]);
+
         $request->session()
             ->flash('alert-success', 'Contact was successfully destroyed!');
 
@@ -95,6 +120,14 @@ class ContactController extends Controller
     {
         $contact = Contact::withTrashed()->find($id);
         $contact->restore();
+
+        Change::create([
+            'type' => 'restore',
+            'subject' => 'contact',
+            'user_id' => auth()->user()->id,
+            'contact_id' => $contact->id,
+            'account_id' => $contact->account_id,
+        ]);
 
         $request->session()
             ->flash('alert-success', 'Contact was successfully restored!');

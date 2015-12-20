@@ -16,6 +16,7 @@ class CreateChangesTable extends Migration
             $table->increments('id');
 
             $table->string('type');
+            $table->string('subject');
             $table->string('user_id')->nullable();
             $table->integer('account_id')->nullable();
             $table->integer('contact_id')->nullable();

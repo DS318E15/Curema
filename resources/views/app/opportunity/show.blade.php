@@ -85,7 +85,7 @@
                     <h1>Activities</h1>
                     <a href="{{ route('app.opportunity.activities', $opportunity->id) }}" class="button">Show all</a>
                 </header>
-
+                @include('app.opportunity.activity')
             </div>
         </section>
     </div>

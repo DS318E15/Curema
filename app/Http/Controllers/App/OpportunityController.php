@@ -2,6 +2,7 @@
 
 namespace Curema\Http\Controllers\App;
 
+use Curema\Models\App\Change;
 use Curema\Models\User;
 use Curema\Models\App\Account;
 use Curema\Models\App\Opportunity;
@@ -40,6 +41,14 @@ class OpportunityController extends Controller
         $opportunity->fill($request->all());
         $opportunity->save();
 
+        Change::create([
+            'type' => 'create',
+            'subject' => 'opportunity',
+            'user_id' => auth()->user()->id,
+            'account_id' => $opportunity->account_id,
+            'opportunity_id' => $opportunity->id,
+        ]);
+
         $request->session()
             ->flash('alert-success', 'Opportunity was successfully created!');
 
@@ -75,6 +84,14 @@ class OpportunityController extends Controller
         $opportunity->fill($request->all());
         $opportunity->save();
 
+        Change::create([
+            'type' => 'update',
+            'subject' => 'opportunity',
+            'user_id' => auth()->user()->id,
+            'account_id' => $opportunity->account_id,
+            'opportunity_id' => $opportunity->id,
+        ]);
+
         $request->session()
             ->flash('alert-success', 'Opportunity was successfully updated!');
 
@@ -86,16 +103,32 @@ class OpportunityController extends Controller
         $opportunity = Opportunity::find($id);
         $opportunity->delete();
 
+        Change::create([
+            'type' => 'delete',
+            'subject' => 'opportunity',
+            'user_id' => auth()->user()->id,
+            'account_id' => $opportunity->account_id,
+            'opportunity_id' => $opportunity->id,
+        ]);
+
         $request->session()
             ->flash('alert-success', 'Opportunity was successfully destroyed!');
 
-        return redirect()->route('app.opportunity.index');
+        return redirect()->route('app . opportunity . index');
     }
 
     public function restore(Request $request, $id)
     {
         $opportunity = Account::withTrashed()->find($id);
         $opportunity->restore();
+
+        Change::create([
+            'type' => 'restore',
+            'subject' => 'opportunity',
+            'user_id' => auth()->user()->id,
+            'account_id' => $opportunity->account_id,
+            'opportunity_id' => $opportunity->id,
+        ]);
 
         $request->session()
             ->flash('alert-success', 'Opportunity was successfully restored!');
@@ -105,7 +138,7 @@ class OpportunityController extends Controller
 
     public function trash()
     {
-        return view('app.opportunity.trash', [
+        return view('app . opportunity . trash', [
             'opportunities' => Opportunity::onlyTrashed()
                 ->orderBy('updated_at', 'DESC')->get()
         ]);
@@ -113,7 +146,7 @@ class OpportunityController extends Controller
 
     public function activities($id)
     {
-        return view('app.opportunity.activities', [
+        return view('app . opportunity . activities', [
             'opportunity' => Opportunity::find($id)
         ]);
     }

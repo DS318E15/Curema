@@ -2,6 +2,7 @@
 
 namespace Curema\Http\Controllers\App;
 
+use Curema\Models\App\Change;
 use Curema\Models\User;
 use Curema\Models\App\Lead;
 use Curema\Models\App\Account;
@@ -40,6 +41,13 @@ class LeadController extends Controller
         $lead->fill($request->all());
         $lead->save();
 
+        Change::create([
+            'type' => 'create',
+            'subject' => 'lead',
+            'user_id' => auth()->user()->id,
+            'lead_id' => $lead->id,
+        ]);
+
         $request->session()
             ->flash('alert-success', 'Lead was successfully created!');
 
@@ -72,6 +80,13 @@ class LeadController extends Controller
         $lead->fill($request->all());
         $lead->save();
 
+        Change::create([
+            'type' => 'update',
+            'subject' => 'lead',
+            'user_id' => auth()->user()->id,
+            'lead_id' => $lead->id,
+        ]);
+
         $request->session()
             ->flash('alert-success', 'Lead was successfully updated!');
 
@@ -83,6 +98,13 @@ class LeadController extends Controller
         $lead = Lead::find($id);
         $lead->delete();
 
+        Change::create([
+            'type' => 'delete',
+            'subject' => 'lead',
+            'user_id' => auth()->user()->id,
+            'lead_id' => $lead->id,
+        ]);
+
         $request->session()
             ->flash('alert-success', 'Lead was successfully destroyed!');
 
@@ -93,6 +115,13 @@ class LeadController extends Controller
     {
         $lead = Lead::find($id);
         $lead->restore();
+
+        Change::create([
+            'type' => 'restore',
+            'subject' => 'lead',
+            'user_id' => auth()->user()->id,
+            'lead_id' => $lead->id,
+        ]);
 
         $request->session()
             ->flash('alert-success', 'Lead was successfully restored!');
