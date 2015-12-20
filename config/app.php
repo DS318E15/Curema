@@ -146,6 +146,7 @@ return [
         Curema\Providers\RouteServiceProvider::class,
         Curema\Providers\ComposerServiceProvider::class,
         Laravelista\Ekko\EkkoServiceProvider::class,
+        Bican\Roles\RolesServiceProvider::class,
     ],
 
     /*
@@ -192,7 +193,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
         'Ekko' => Laravelista\Ekko\Facades\Ekko::class,
+
     ],
 
 ];

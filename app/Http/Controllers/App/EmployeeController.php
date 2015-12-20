@@ -36,7 +36,7 @@ class EmployeeController extends Controller
 
     public function edit($id)
     {
-        return view('app.account.edit', [
+        return view('app.employee.edit', [
             'employee' => User::withTrashed()->find($id),
         ]);
     }

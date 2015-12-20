@@ -13,6 +13,10 @@
             <div class="panel">
                 <header>
                     <a href="{{ route('app.employee.index') }}" class="button">Back</a>
+
+                    @permission('edit.users')
+                    <a href="{{ route('app.employee.edit', $employee->id) }}" class="button">Edit</a>
+                    @endpermission
                 </header>
 
                 <div class="input">

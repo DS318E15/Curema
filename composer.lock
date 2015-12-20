@@ -4,9 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "66d13f18b8392ece515cb8e8fe944f66",
-    "content-hash": "9a0ee8e06fcaa0aa002ad1624d902504",
+    "hash": "d41a4a02e5f01e50f41478a8044c7603",
+    "content-hash": "2ee28f2c8afbdd6c8e9af832aecfd08f",
     "packages": [
+        {
+            "name": "bican/roles",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/christopherburton/roles.git",
+                "reference": "fbb3545b5664bd8309732c3f644b9dab8c6f6c88"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/christopherburton/roles/zipball/fbb3545b5664bd8309732c3f644b9dab8c6f6c88",
+                "reference": "fbb3545b5664bd8309732c3f644b9dab8c6f6c88",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Bican\\Roles": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roman Bičan",
+                    "email": "romanbican@seznam.cz"
+                }
+            ],
+            "description": "Powerful package for handling roles and permissions in Laravel 5.",
+            "keywords": [
+                "acl",
+                "auth",
+                "illuminate",
+                "laravel",
+                "permissions",
+                "roles"
+            ],
+            "support": {
+                "source": "https://github.com/christopherburton/roles/tree/master"
+            },
+            "time": "2015-09-14 00:49:33"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "3.0.0",
@@ -3231,7 +3278,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "bican/roles": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -1,5 +1,8 @@
 <?php
 
+use Bican\Roles\Models\Permission;
+use Bican\Roles\Models\Role;
+use Curema\Models\User;
 use Illuminate\Database\Seeder;
 
 class UserTableSeeder extends Seeder
@@ -11,7 +14,37 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        \Curema\Models\User::create([
+        $superiorRole = Role::create([
+            'name' => 'Superior',
+            'slug' => 'superior',
+        ]);
+
+        $salespersonRole = Role::create([
+            'name' => 'Salesperson',
+            'slug' => 'salesperson',
+        ]);
+
+        $supporterRole = Role::create([
+            'name' => 'Supporter',
+            'slug' => 'supporter',
+        ]);
+
+        $superiorRole->attachPermission(Permission::create([
+            'name' => 'Create users',
+            'slug' => 'create.users',
+        ]));
+
+        $superiorRole->attachPermission(Permission::create([
+            'name' => 'Edit users',
+            'slug' => 'edit.users',
+        ]));
+
+        $superiorRole->attachPermission(Permission::create([
+            'name' => 'Delete users',
+            'slug' => 'delete.users',
+        ]));
+
+        $user = User::create([
             'name' => 'Rasmus Nørskov',
             'title' => 'CEO',
             'street_name' => 'Hobrovej',
@@ -24,7 +57,9 @@ class UserTableSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
 
-        \Curema\Models\User::create([
+        $user->attachRole($superiorRole);
+
+        $user = User::create([
             'name' => 'Andreas Sommerset',
             'title' => 'Intern',
             'street_name' => 'Ribevej',
@@ -37,7 +72,9 @@ class UserTableSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
 
-        \Curema\Models\User::create([
+        $user->attachRole($salespersonRole);
+
+        $user = User::create([
             'name' => 'Nicklas Embo',
             'title' => 'Office Assistant',
             'street_name' => 'Henning Smiths Vej',
@@ -49,6 +86,8 @@ class UserTableSeeder extends Seeder
             'email' => 'nembo14@student.aau.dk',
             'password' => bcrypt('password'),
         ]);
+
+        $user->attachRole($supporterRole);
 
         factory(Curema\Models\User::class, 27)->create();
     }

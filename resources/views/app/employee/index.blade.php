@@ -4,6 +4,15 @@
 
     <header>
         <h1>Employees</h1>
+
+        @permission('create.users')
+        <div class="button-group">
+            <a href="{{ route('app.lead.create') }}" class="button">Create</a>
+            <a href="{{ route('app.lead.trash') }}" class="button icon-trash"></a>
+        </div>
+        @endpermission
+
+
     </header>
 
     @if(Session::has('alert-success'))
