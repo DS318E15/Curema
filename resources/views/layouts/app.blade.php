@@ -18,7 +18,7 @@
 </nav>
 <div>
     <header>
-        <!-- header -->
+        @include('app.header')
     </header>
     <main>
         @yield('content')

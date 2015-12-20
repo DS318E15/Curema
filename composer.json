@@ -31,10 +31,7 @@
     ],
     "psr-4": {
       "Curema\\": "app/"
-    },
-    "files": [
-      "app/Http/helpers.php"
-    ]
+    }
   },
   "autoload-dev": {
     "classmap": [

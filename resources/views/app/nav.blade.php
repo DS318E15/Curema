@@ -21,7 +21,7 @@
     </li>
     <li>
         <a href="{{ route('app.employee.index') }}"
-           class="{{ Ekko::areActiveRoutes(['app.employee.index', 'app.employee.show']) }}">Employees</a>
+           class="{{ Ekko::areActiveRoutes(['app.employee.index', 'app.employee.create', 'app.employee.show', 'app.employee.edit', 'app.employee.trash', 'app.employee.activities']) }}">Employees</a>
     </li>
     <li>
         <a href="{{ route('app.ticket.index') }}"

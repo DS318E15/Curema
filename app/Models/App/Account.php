@@ -11,16 +11,15 @@ class Account extends Model
 
     protected $guarded = [];
 
-    public function user()
-    {
-        return $this->belongsTo('Curema\Models\User')
-            ->withTrashed()
-            ->orderBy('updated_at', 'DESC');
-    }
-
     public function changes()
     {
         return $this->hasMany('Curema\Models\App\Change')
+            ->orderBy('updated_at', 'DESC');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('Curema\Models\User')
             ->withTrashed()
             ->orderBy('updated_at', 'DESC');
     }

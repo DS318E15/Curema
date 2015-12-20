@@ -63,9 +63,9 @@ Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
     Route::get('/', 'App\DashboardController@index')->name('app.dashboard.index');
 });
 
-Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout')->name('auth.logout');
+Route::get('auth/login', 'Auth\AuthController@getLogin')->name('auth.login');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 Route::get('/', function () {
     return view('home');

@@ -3,7 +3,7 @@
 @section('content')
 
     <header>
-        <h1>Lead activities</h1>
+        <h1>Employee activities</h1>
 
         <a href="{{ route('app.employee.show', $employee->id) }}" class="button">Back</a>
     </header>
